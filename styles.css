@@ -52,6 +52,32 @@ main {
   padding: 20px 16px 60px;
 }
 
+/* Category tabs */
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--grey-200);
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--grey-600);
+  transition: all 0.15s;
+}
+.tab:hover { background: var(--grey-100); }
+.tab.active {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+
 /* Controls */
 .controls {
   display: flex;
@@ -72,6 +98,20 @@ main {
   font-size: 14px;
   color: var(--grey-600);
   white-space: nowrap;
+}
+
+/* Search input */
+#search-input {
+  padding: 6px 12px;
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius);
+  font-size: 14px;
+  width: 220px;
+  background: white;
+}
+#search-input:focus {
+  outline: none;
+  border-color: var(--blue);
 }
 
 select {
@@ -183,12 +223,15 @@ td {
 }
 
 /* Column widths */
-.col-status  { width: 140px; }
-.col-employer { width: 160px; font-weight: 600; }
-.col-scheme  { min-width: 180px; }
-.col-disciplines { width: 160px; }
-.col-deadline { width: 130px; }
-.col-notes   { min-width: 160px; color: var(--grey-600); font-size: 13px; }
+.col-status      { width: 130px; }
+.col-employer    { width: 150px; font-weight: 600; }
+.col-scheme      { min-width: 170px; }
+.col-disciplines { width: 150px; }
+.col-opening     { width: 110px; }
+.col-deadline    { width: 110px; }
+.col-notes       { min-width: 150px; color: var(--grey-600); font-size: 13px; }
+
+th.sort-active { color: var(--blue); }
 
 /* Employer link */
 .employer-link {
