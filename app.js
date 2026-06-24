@@ -116,6 +116,7 @@ function rowHTML(e) {
       <td><div class="tags">${disciplines}</div></td>
       <td>${dateCellHTML(e.opening_date, false)}</td>
       <td>${dateCellHTML(e.deadline, true, e)}${stale}</td>
+      <td class="col-locations">${(e.locations || []).join(', ')}</td>
       <td class="col-rolling">${e.rolling_basis ? '<span class="rolling-yes">✓</span>' : '<span class="rolling-no">—</span>'}</td>
       <td class="col-notes">${notes}</td>
     </tr>`;
@@ -234,11 +235,12 @@ function loadStatus(id) {
 // ── CSV export ─────────────────────────────────────────────────────────────
 
 function exportCSV() {
-  const headers = ['Employer', 'Scheme', 'Category', 'Disciplines', 'Opens', 'Closes', 'Status', 'Rolling', 'URL'];
+  const headers = ['Employer', 'Scheme', 'Category', 'Disciplines', 'Opens', 'Closes', 'Locations', 'Status', 'Rolling', 'URL'];
   const rows = allEmployers.map(e => [
     e.employer, e.scheme_name, e.category || '',
     (e.disciplines || []).join('; '),
     e.opening_date || '', e.deadline || (e.rolling_basis ? 'Rolling' : 'TBC'),
+    (e.locations || []).join('; '),
     loadStatus(e.id), e.rolling_basis ? 'Yes' : 'No', e.url
   ]);
   const csv = [headers, ...rows]

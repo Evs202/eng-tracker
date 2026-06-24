@@ -285,6 +285,7 @@ td {
 .col-disciplines { width: 160px; }
 .col-opening     { width: 100px; }
 .col-deadline    { width: 100px; }
+.col-locations   { width: 140px; font-size: 13px; color: var(--grey-600); }
 .col-rolling     { width: 68px; text-align: center; }
 .col-notes       { min-width: 150px; color: var(--grey-600); font-size: 13px; }
 

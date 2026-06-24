@@ -20,7 +20,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.rolls-royce.com/united-kingdom/graduates",
       "last_verified": "2026-06-24",
-      "last_scraped": "2026-06-24"
+      "last_scraped": "2026-06-24",
+      "locations": [
+        "Derby",
+        "Bristol"
+      ]
     },
     {
       "id": "bae-systems-grad-2027",
@@ -42,7 +46,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.baesystems.com/en/careers/careers-in-the-uk/graduates",
       "last_verified": "2026-06-24",
-      "last_scraped": "2026-06-24"
+      "last_scraped": "2026-06-24",
+      "locations": [
+        "Various UK"
+      ]
     },
     {
       "id": "arup-grad-2027",
@@ -61,7 +68,11 @@ const DEADLINES_DATA = {
       "early_closure_note": "Closes when full — typically fills by November. Apply early.",
       "url": "https://www.arup.com/careers/graduates",
       "last_verified": "2026-06-24",
-      "last_scraped": "2026-06-24"
+      "last_scraped": "2026-06-24",
+      "locations": [
+        "London",
+        "Various UK"
+      ]
     },
     {
       "id": "airbus-grad-2027",
@@ -82,7 +93,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.airbus.com/en/careers/students-and-graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Bristol",
+        "Broughton"
+      ]
     },
     {
       "id": "gkn-aerospace-grad-2027",
@@ -101,7 +116,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.gknaerospace.com/careers/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Birmingham",
+        "Bristol"
+      ]
     },
     {
       "id": "thales-grad-2027",
@@ -121,7 +140,12 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.thalesgroup.com/en/united-kingdom/careers",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Glasgow",
+        "London",
+        "Bristol"
+      ]
     },
     {
       "id": "leonardo-grad-2027",
@@ -141,7 +165,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://uk.leonardocompany.com/en/-/careers",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Edinburgh",
+        "Yeovil"
+      ]
     },
     {
       "id": "mbda-grad-2027",
@@ -162,7 +190,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.mbda-systems.com/careers/graduates/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Stevenage",
+        "Bristol"
+      ]
     },
     {
       "id": "qinetiq-grad-2027",
@@ -183,7 +215,10 @@ const DEADLINES_DATA = {
       "early_closure_note": "Fills quickly — early application recommended.",
       "url": "https://careers.qinetiq.com/early-careers",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Farnborough"
+      ]
     },
     {
       "id": "babcock-grad-2027",
@@ -203,7 +238,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.babcock.com/early-careers/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Plymouth",
+        "Bristol"
+      ]
     },
     {
       "id": "national-grid-grad-2027",
@@ -223,7 +262,11 @@ const DEADLINES_DATA = {
       "early_closure_note": "Historically closes early — apply in September.",
       "url": "https://careers.nationalgrid.com/early-careers",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Warwick",
+        "London"
+      ]
     },
     {
       "id": "sse-grad-2027",
@@ -243,7 +286,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.sse.com/careers/graduates-and-apprentices/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Perth",
+        "Various UK"
+      ]
     },
     {
       "id": "edf-energy-grad-2027",
@@ -263,7 +310,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.edfenergy.com/careers/graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Gloucester",
+        "London"
+      ]
     },
     {
       "id": "orsted-grad-2027",
@@ -283,7 +334,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://orsted.com/en/careers/students-and-graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London"
+      ]
     },
     {
       "id": "scottishpower-grad-2027",
@@ -302,7 +356,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.scottishpower.com/early-careers",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Glasgow"
+      ]
     },
     {
       "id": "rwe-grad-2027",
@@ -321,7 +378,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.rwe.com/en/careers/students-and-graduates/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Swindon",
+        "London"
+      ]
     },
     {
       "id": "centrica-grad-2027",
@@ -341,7 +402,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.centrica.com/early-careers",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Windsor"
+      ]
     },
     {
       "id": "abb-grad-2027",
@@ -361,7 +425,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.abb/global/en/students",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Various UK"
+      ]
     },
     {
       "id": "schneider-electric-grad-2027",
@@ -381,7 +448,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.se.com/uk/en/about-us/careers/student-opportunities/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Coventry",
+        "London"
+      ]
     },
     {
       "id": "wsp-grad-2027",
@@ -401,7 +472,11 @@ const DEADLINES_DATA = {
       "early_closure_note": "Roles posted year-round — vacancies fill throughout the year.",
       "url": "https://www.wsp.com/en-GB/careers/graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London",
+        "Various UK"
+      ]
     },
     {
       "id": "mott-macdonald-grad-2027",
@@ -421,7 +496,11 @@ const DEADLINES_DATA = {
       "early_closure_note": "Rolling intake — apply when roles appear on their site.",
       "url": "https://www.mottmac.com/careers/graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Croydon",
+        "Various UK"
+      ]
     },
     {
       "id": "jacobs-grad-2027",
@@ -441,7 +520,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.jacobs.com/students-and-graduates/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Various UK"
+      ]
     },
     {
       "id": "aecom-grad-2027",
@@ -460,7 +542,11 @@ const DEADLINES_DATA = {
       "early_closure_note": "Roles posted on a rolling basis — check regularly.",
       "url": "https://www.aecom.com/careers/students-and-graduates/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London",
+        "Various UK"
+      ]
     },
     {
       "id": "balfour-beatty-grad-2027",
@@ -479,7 +565,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://jobs.balfourbeatty.com/early-careers",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London",
+        "Various UK"
+      ]
     },
     {
       "id": "laing-orourke-grad-2027",
@@ -498,7 +588,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.laingorourke.com/careers/graduates/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Dartford"
+      ]
     },
     {
       "id": "network-rail-grad-2027",
@@ -518,7 +611,12 @@ const DEADLINES_DATA = {
       "early_closure_note": "High demand — apply promptly when scheme opens.",
       "url": "https://www.networkrail.co.uk/careers/early-careers/graduate-programme/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London",
+        "York",
+        "Birmingham"
+      ]
     },
     {
       "id": "national-highways-grad-2027",
@@ -537,7 +635,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.nationalhighways.co.uk/careers/early-careers/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Birmingham"
+      ]
     },
     {
       "id": "tfl-grad-2027",
@@ -557,7 +658,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.tfl.gov.uk/students-and-graduates/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London"
+      ]
     },
     {
       "id": "jlr-grad-2027",
@@ -577,7 +681,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.jaguarlandrover.com/careers/graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Coventry",
+        "Solihull"
+      ]
     },
     {
       "id": "dyson-grad-2027",
@@ -597,7 +705,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.dyson.com/graduate-programs",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Malmesbury"
+      ]
     },
     {
       "id": "renishaw-grad-2027",
@@ -617,7 +728,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.renishaw.com/en/graduate-development-programme--6462",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Wotton-under-Edge"
+      ]
     },
     {
       "id": "bp-grad-2027",
@@ -637,7 +751,11 @@ const DEADLINES_DATA = {
       "early_closure_note": "Often fills ahead of the stated deadline.",
       "url": "https://www.bp.com/en/global/corporate/careers/students-and-graduates.html",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London",
+        "Aberdeen"
+      ]
     },
     {
       "id": "shell-grad-2027",
@@ -657,7 +775,10 @@ const DEADLINES_DATA = {
       "early_closure_note": "Historically closes in November — apply immediately on opening.",
       "url": "https://www.shell.co.uk/careers/students-and-graduates.html",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London"
+      ]
     },
     {
       "id": "johnson-matthey-grad-2027",
@@ -675,7 +796,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://matthey.com/en/careers/graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London",
+        "Royston"
+      ]
     },
     {
       "id": "wood-grad-2027",
@@ -695,7 +820,11 @@ const DEADLINES_DATA = {
       "early_closure_note": "Roles posted on a rolling basis throughout the year.",
       "url": "https://www.woodplc.com/careers/students-and-graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Aberdeen",
+        "Various UK"
+      ]
     },
     {
       "id": "medtronic-grad-2027",
@@ -715,7 +844,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://jobs.medtronic.com/jobs/student-and-graduate",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Various UK"
+      ]
     },
     {
       "id": "smith-nephew-grad-2027",
@@ -733,7 +865,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.smith-nephew.com/early-careers",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Hull",
+        "London"
+      ]
     },
     {
       "id": "siemens-healthineers-grad-2027",
@@ -753,7 +889,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.siemens-healthineers.com/en-uk/careers/students-graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Oxford",
+        "London"
+      ]
     },
     {
       "id": "ge-healthcare-grad-2027",
@@ -772,7 +912,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.gehealthcare.com/students-and-graduates",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Chalfont St Giles"
+      ]
     },
     {
       "id": "atkins-placement-2027",
@@ -791,7 +934,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.atkins.com/early-careers",
       "last_verified": "2026-06-24",
-      "last_scraped": "2026-06-24"
+      "last_scraped": "2026-06-24",
+      "locations": [
+        "Various UK"
+      ]
     },
     {
       "id": "rolls-royce-placement-2027",
@@ -811,7 +957,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.rolls-royce.com/united-kingdom/students",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Derby",
+        "Bristol"
+      ]
     },
     {
       "id": "bae-systems-placement-2027",
@@ -831,7 +981,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.baesystems.com/en/careers/careers-in-the-uk/students",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Various UK"
+      ]
     },
     {
       "id": "jlr-placement-2027",
@@ -850,7 +1003,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.jaguarlandrover.com/careers/students",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Coventry",
+        "Solihull"
+      ]
     },
     {
       "id": "astrazeneca-placement-2027",
@@ -868,7 +1025,11 @@ const DEADLINES_DATA = {
       "early_closure_note": "Competitive — apply as early as possible after opening.",
       "url": "https://careers.astrazeneca.com/students",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Cambridge",
+        "Macclesfield"
+      ]
     },
     {
       "id": "gsk-placement-2027",
@@ -887,7 +1048,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.gsk.com/en-gb/careers/students-and-graduates/",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Stevenage",
+        "Brentford"
+      ]
     },
     {
       "id": "siemens-summer-2027",
@@ -907,7 +1072,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.siemens.com/uk/en/company/jobs/students-graduates.html",
       "last_verified": "2026-06-24",
-      "last_scraped": "2026-06-24"
+      "last_scraped": "2026-06-24",
+      "locations": [
+        "Various UK"
+      ]
     },
     {
       "id": "bp-summer-2027",
@@ -927,7 +1095,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.bp.com/en/global/corporate/careers/students-and-graduates.html",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London",
+        "Aberdeen"
+      ]
     },
     {
       "id": "shell-summer-2027",
@@ -946,7 +1118,10 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://www.shell.co.uk/careers/students-and-graduates.html",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "London"
+      ]
     },
     {
       "id": "national-grid-summer-2027",
@@ -965,7 +1140,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.nationalgrid.com/early-careers",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Warwick",
+        "London"
+      ]
     },
     {
       "id": "rolls-royce-summer-2027",
@@ -984,7 +1163,11 @@ const DEADLINES_DATA = {
       "early_closure_note": null,
       "url": "https://careers.rolls-royce.com/united-kingdom/students",
       "last_verified": null,
-      "last_scraped": null
+      "last_scraped": null,
+      "locations": [
+        "Derby",
+        "Bristol"
+      ]
     }
   ]
 };
