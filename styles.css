@@ -274,7 +274,7 @@ tbody tr:last-child { border-bottom: none; }
 tbody tr:hover { background: var(--grey-50); }
 
 td {
-  padding: 5px 12px;
+  padding: 3px 12px;
   vertical-align: middle;
 }
 
@@ -296,17 +296,54 @@ td {
 }
 .employer-link:hover { color: var(--blue); text-decoration: underline; }
 
-/* Discipline tags */
-.tags { display: flex; flex-wrap: wrap; gap: 4px; }
-.tag {
-  background: var(--blue-light);
-  color: var(--blue);
-  border-radius: 4px;
-  padding: 2px 7px;
-  font-size: 11px;
-  font-weight: 500;
+/* Discipline emojis */
+.disc-emoji {
+  font-size: 16px;
+  cursor: default;
+  line-height: 1;
+}
+
+/* Key button + tooltip */
+.disc-key-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.disc-key-btn {
+  padding: 6px 14px;
+  background: white;
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius);
+  font-size: 13px;
+  cursor: default;
+  color: var(--grey-600);
+}
+
+.disc-key-tooltip {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  background: white;
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  padding: 12px 16px;
+  z-index: 100;
+  min-width: 210px;
+}
+
+.disc-key-wrap:hover .disc-key-tooltip { display: block; }
+
+.disc-key-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px 10px;
+  font-size: 13px;
+  color: var(--grey-900);
   white-space: nowrap;
 }
+.disc-key-grid span:nth-child(odd) { font-size: 15px; }
 
 /* Date cells */
 .deadline-date { font-weight: 500; }

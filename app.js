@@ -1,6 +1,19 @@
 'use strict';
 
 const STATUSES = ['Not started', 'Applied', 'Online Test', 'Interview', 'Offer', 'Rejected'];
+
+const DISC_EMOJI = {
+  'Aerospace Engineering':    '✈️',
+  'Biomedical Engineering':   '🧬',
+  'Chemical Engineering':     '⚗️',
+  'Civil Engineering':        '🏗️',
+  'Electrical & Electronics': '⚡',
+  'Mechanical Engineering':   '⚙️',
+  'Renewable Energy':         '☀️',
+  'Robotics & Automation':    '🤖',
+  'Software Engineering':     '💻',
+  'Systems Engineering':      '🔧',
+};
 const STALE_DAYS = 60;
 
 let allEmployers = [];
@@ -83,7 +96,9 @@ function render() {
 }
 
 function rowHTML(e) {
-  const disciplines = (e.disciplines || []).map(d => `<span class="tag">${d}</span>`).join('');
+  const disciplines = (e.disciplines || []).map(d =>
+    `<span class="disc-emoji" title="${d}">${DISC_EMOJI[d] || d}</span>`
+  ).join('');
   const stale = isStale(e.last_verified) ? `<span class="stale-badge" title="Last verified ${e.last_verified}">OLD</span>` : '';
   const notes = e.early_closure_note
     ? `⚠️ ${e.early_closure_note}`
