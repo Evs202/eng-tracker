@@ -16,7 +16,7 @@ async function init() {
   if (typeof DEADLINES_DATA === 'undefined') {
     document.getElementById('error-banner').classList.remove('hidden');
     document.getElementById('table-body').innerHTML =
-      '<tr><td colspan="7" class="loading">Could not load data.</td></tr>';
+      '<tr><td colspan="8" class="loading">Could not load data.</td></tr>';
     return;
   }
   allEmployers = DEADLINES_DATA.employers || [];
@@ -101,6 +101,7 @@ function rowHTML(e) {
       <td><div class="tags">${disciplines}</div></td>
       <td>${dateCellHTML(e.opening_date, false)}</td>
       <td>${dateCellHTML(e.deadline, true, e)}${stale}</td>
+      <td class="col-rolling">${e.rolling_basis ? '<span class="rolling-yes">✓</span>' : '<span class="rolling-no">—</span>'}</td>
       <td class="col-notes">${notes}</td>
     </tr>`;
 }
@@ -167,8 +168,9 @@ function setSort(field) {
     currentSort = { field, dir: 'asc' };
   }
   // Update icons
-  ['opening', 'deadline'].forEach(f => {
-    const th = document.getElementById(`sort-${f}`);
+  const colMap = { opening_date: 'opening', deadline: 'deadline' };
+  Object.entries(colMap).forEach(([f, elId]) => {
+    const th = document.getElementById(`sort-${elId}`);
     const icon = th.querySelector('.sort-icon');
     if (f === currentSort.field) {
       icon.textContent = currentSort.dir === 'asc' ? '▲' : '▼';

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UK Engineering Grad Scheme Deadlines 2027</title>
+  <title>UK Engineering Tracker</title>
   <meta name="description" content="All UK engineering graduate scheme deadlines in one place. Filter by discipline, sort by deadline, track your applications. No login required.">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,80 +14,106 @@
   <p class="subtitle">All deadlines visible at once. No carousel. No login. Updated weekly.</p>
 </header>
 
-<main>
-  <!-- Category tabs -->
-  <div class="category-tabs">
-    <button class="tab active" data-category="all">All</button>
-    <button class="tab" data-category="Graduate Scheme">Graduate Schemes</button>
-    <button class="tab" data-category="Industrial Placement">Industrial Placements</button>
-    <button class="tab" data-category="Summer Internship">Summer Internships</button>
-    <button class="tab" data-category="Spring Week">Spring Weeks</button>
-  </div>
+<div class="layout">
 
-  <!-- Filters row -->
-  <div class="controls">
-    <div class="filters">
-      <input id="search-input" type="text" placeholder="Search company or scheme…" autocomplete="off">
-
-      <select id="discipline-filter">
-        <option value="all">All disciplines</option>
-        <option value="Mechanical">Mechanical</option>
-        <option value="Civil">Civil</option>
-        <option value="Electrical">Electrical</option>
-        <option value="Aerospace">Aerospace</option>
-        <option value="Chemical">Chemical</option>
-      </select>
-
-      <select id="status-filter">
-        <option value="all">Any status</option>
-        <option value="open">Open now</option>
-        <option value="rolling">Rolling</option>
-        <option value="not_yet_open">Not open yet</option>
-        <option value="closed">Closed</option>
-      </select>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>My Status</h3>
+      <ul class="legend">
+        <li><span class="legend-dot" style="background:#9ca3af"></span>Not started</li>
+        <li><span class="legend-dot" style="background:#2563eb"></span>Applied</li>
+        <li><span class="legend-dot" style="background:#d97706"></span>Online Test</li>
+        <li><span class="legend-dot" style="background:#7c3aed"></span>Interview</li>
+        <li><span class="legend-dot" style="background:#16a34a"></span>Offer</li>
+        <li><span class="legend-dot" style="background:#dc2626"></span>Rejected</li>
+      </ul>
     </div>
-    <div class="actions">
-      <button id="export-btn" class="btn-secondary">⬇ Download tracker (CSV)</button>
-      <a href="https://forms.gle/placeholder" id="report-link" target="_blank" rel="noopener" class="btn-link">Report a mistake</a>
+
+    <div class="sidebar-section">
+      <h3>Scheme Type</h3>
+      <nav class="side-nav">
+        <button class="tab active" data-category="all">All schemes</button>
+        <button class="tab" data-category="Graduate Scheme">Graduate Schemes</button>
+        <button class="tab" data-category="Industrial Placement">Industrial Placements</button>
+        <button class="tab" data-category="Summer Internship">Summer Internships</button>
+        <button class="tab" data-category="Spring Week">Spring Weeks</button>
+      </nav>
     </div>
-  </div>
 
-  <div id="error-banner" class="error-banner hidden">
-    Could not load deadline data. Please refresh the page.
-  </div>
+    <div class="sidebar-section sidebar-note">
+      <p>Future: filter by sector (Aerospace, Infrastructure, Energy…)</p>
+    </div>
+  </aside>
 
-  <div id="empty-state" class="empty-state hidden">
-    No schemes match that filter. <button onclick="resetFilters()">Show all</button>
-  </div>
+  <!-- Main content -->
+  <main class="main">
 
-  <div class="table-wrapper">
-    <table id="deadlines-table">
-      <thead>
-        <tr>
-          <th class="col-status">My Status</th>
-          <th class="col-employer">Employer</th>
-          <th class="col-scheme">Scheme</th>
-          <th class="col-disciplines">Disciplines</th>
-          <th class="col-opening sortable" id="sort-opening" onclick="setSort('opening')">
-            Opens <span class="sort-icon"></span>
-          </th>
-          <th class="col-deadline sortable" id="sort-deadline" onclick="setSort('deadline')">
-            Closes <span class="sort-icon">▲</span>
-          </th>
-          <th class="col-notes">Notes</th>
-        </tr>
-      </thead>
-      <tbody id="table-body">
-        <tr><td colspan="7" class="loading">Loading deadlines…</td></tr>
-      </tbody>
-    </table>
-  </div>
+    <!-- Filters row -->
+    <div class="controls">
+      <div class="filters">
+        <input id="search-input" type="text" placeholder="Search company or scheme…" autocomplete="off">
+        <select id="discipline-filter">
+          <option value="all">All disciplines</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Civil">Civil</option>
+          <option value="Electrical">Electrical</option>
+          <option value="Aerospace">Aerospace</option>
+          <option value="Chemical">Chemical</option>
+        </select>
+        <select id="status-filter">
+          <option value="all">Any status</option>
+          <option value="open">Open now</option>
+          <option value="rolling">Rolling</option>
+          <option value="not_yet_open">Not open yet</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div class="actions">
+        <button id="export-btn" class="btn-secondary">⬇ Download tracker (CSV)</button>
+        <a href="https://forms.gle/placeholder" target="_blank" rel="noopener" class="btn-link">Report a mistake</a>
+      </div>
+    </div>
 
-  <p class="data-note">
-    Data verified manually against employer career pages.
-    <a href="https://forms.gle/placeholder" target="_blank" rel="noopener">Report a mistake →</a>
-  </p>
-</main>
+    <div id="error-banner" class="error-banner hidden">
+      Could not load deadline data. Please refresh the page.
+    </div>
+
+    <div id="empty-state" class="empty-state hidden">
+      No schemes match that filter. <button onclick="resetFilters()">Show all</button>
+    </div>
+
+    <div class="table-wrapper">
+      <table id="deadlines-table">
+        <thead>
+          <tr>
+            <th class="col-status">My Status</th>
+            <th class="col-employer">Employer</th>
+            <th class="col-scheme">Scheme</th>
+            <th class="col-disciplines">Disciplines</th>
+            <th class="col-opening sortable" id="sort-opening" onclick="setSort('opening_date')">
+              Opens <span class="sort-icon"></span>
+            </th>
+            <th class="col-deadline sortable" id="sort-deadline" onclick="setSort('deadline')">
+              Closes <span class="sort-icon">▲</span>
+            </th>
+            <th class="col-rolling">Rolling</th>
+            <th class="col-notes">Notes</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr><td colspan="8" class="loading">Loading deadlines…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="data-note">
+      Data verified manually against employer career pages.
+      <a href="https://forms.gle/placeholder" target="_blank" rel="noopener">Report a mistake →</a>
+    </p>
+  </main>
+
+</div>
 
 <script src="data/deadlines.js"></script>
 <script src="app.js"></script>
