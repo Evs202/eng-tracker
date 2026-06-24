@@ -1,10 +1,18 @@
 {
   "employers": [
     {
-      "id": "rolls-royce-engineering-2027",
+      "id": "rolls-royce-grad-2027",
       "employer": "Rolls-Royce",
       "scheme_name": "Engineering Graduate Scheme",
-      "disciplines": ["Mechanical", "Aerospace", "Electrical"],
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Aerospace Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Software Engineering",
+        "Systems Engineering"
+      ],
+      "opening_date": "2026-09-01",
       "deadline": "2026-12-05",
       "status": "open",
       "rolling_basis": false,
@@ -14,10 +22,19 @@
       "last_scraped": "2026-06-24"
     },
     {
-      "id": "bae-systems-engineering-2027",
+      "id": "bae-systems-grad-2027",
       "employer": "BAE Systems",
       "scheme_name": "Engineering Graduate Scheme",
-      "disciplines": ["Mechanical", "Aerospace", "Electrical", "Chemical"],
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Aerospace Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Chemical Engineering",
+        "Software Engineering",
+        "Systems Engineering"
+      ],
+      "opening_date": "2026-09-15",
       "deadline": "2027-01-15",
       "status": "open",
       "rolling_basis": false,
@@ -27,10 +44,16 @@
       "last_scraped": "2026-06-24"
     },
     {
-      "id": "arup-engineering-2027",
+      "id": "arup-grad-2027",
       "employer": "Arup",
       "scheme_name": "Graduate Engineer Programme",
-      "disciplines": ["Civil", "Mechanical", "Electrical"],
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics"
+      ],
+      "opening_date": null,
       "deadline": null,
       "status": "rolling",
       "rolling_basis": true,
@@ -38,6 +61,929 @@
       "url": "https://www.arup.com/careers/graduates",
       "last_verified": "2026-06-24",
       "last_scraped": "2026-06-24"
+    },
+    {
+      "id": "airbus-grad-2027",
+      "employer": "Airbus",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Aerospace Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Systems Engineering",
+        "Software Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.airbus.com/en/careers/students-and-graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "gkn-aerospace-grad-2027",
+      "employer": "GKN Aerospace",
+      "scheme_name": "Graduate Development Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Aerospace Engineering",
+        "Mechanical Engineering",
+        "Systems Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.gknaerospace.com/careers/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "thales-grad-2027",
+      "employer": "Thales",
+      "scheme_name": "Graduate Development Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Systems Engineering",
+        "Electrical & Electronics",
+        "Software Engineering",
+        "Aerospace Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.thalesgroup.com/en/united-kingdom/careers",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "leonardo-grad-2027",
+      "employer": "Leonardo",
+      "scheme_name": "Engineering Graduate Scheme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Aerospace Engineering",
+        "Systems Engineering",
+        "Electrical & Electronics",
+        "Software Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://uk.leonardocompany.com/en/-/careers",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "mbda-grad-2027",
+      "employer": "MBDA",
+      "scheme_name": "Engineering Graduate Scheme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Aerospace Engineering",
+        "Systems Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Software Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.mbda-systems.com/careers/graduates/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "qinetiq-grad-2027",
+      "employer": "QinetiQ",
+      "scheme_name": "Graduate Scheme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Systems Engineering",
+        "Aerospace Engineering",
+        "Electrical & Electronics",
+        "Software Engineering",
+        "Mechanical Engineering"
+      ],
+      "opening_date": "2026-08-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": "Fills quickly — early application recommended.",
+      "url": "https://careers.qinetiq.com/early-careers",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "babcock-grad-2027",
+      "employer": "Babcock International",
+      "scheme_name": "Graduate Engineering Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Systems Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Civil Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-02-28",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.babcock.com/early-careers/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "national-grid-grad-2027",
+      "employer": "National Grid",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Electrical & Electronics",
+        "Systems Engineering",
+        "Renewable Energy",
+        "Mechanical Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-11-30",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": "Historically closes early — apply in September.",
+      "url": "https://careers.nationalgrid.com/early-careers",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "sse-grad-2027",
+      "employer": "SSE",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Electrical & Electronics",
+        "Renewable Energy",
+        "Civil Engineering",
+        "Systems Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.sse.com/careers/graduates-and-apprentices/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "edf-energy-grad-2027",
+      "employer": "EDF Energy",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Electrical & Electronics",
+        "Mechanical Engineering",
+        "Civil Engineering",
+        "Chemical Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.edfenergy.com/careers/graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "orsted-grad-2027",
+      "employer": "Orsted",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Renewable Energy",
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Civil Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://orsted.com/en/careers/students-and-graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "scottishpower-grad-2027",
+      "employer": "ScottishPower",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Renewable Energy",
+        "Electrical & Electronics",
+        "Civil Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.scottishpower.com/early-careers",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "rwe-grad-2027",
+      "employer": "RWE",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Renewable Energy",
+        "Mechanical Engineering",
+        "Electrical & Electronics"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-02-28",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.rwe.com/en/careers/students-and-graduates/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "centrica-grad-2027",
+      "employer": "Centrica",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Electrical & Electronics",
+        "Renewable Energy",
+        "Software Engineering",
+        "Mechanical Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.centrica.com/early-careers",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "abb-grad-2027",
+      "employer": "ABB",
+      "scheme_name": "Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Electrical & Electronics",
+        "Robotics & Automation",
+        "Systems Engineering",
+        "Software Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.abb/global/en/students",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "schneider-electric-grad-2027",
+      "employer": "Schneider Electric",
+      "scheme_name": "Graduate Scheme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Electrical & Electronics",
+        "Systems Engineering",
+        "Software Engineering",
+        "Renewable Energy"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.se.com/uk/en/about-us/careers/student-opportunities/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "wsp-grad-2027",
+      "employer": "WSP",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Renewable Energy"
+      ],
+      "opening_date": null,
+      "deadline": null,
+      "status": "rolling",
+      "rolling_basis": true,
+      "early_closure_note": "Roles posted year-round — vacancies fill throughout the year.",
+      "url": "https://www.wsp.com/en-GB/careers/graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "mott-macdonald-grad-2027",
+      "employer": "Mott MacDonald",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Systems Engineering"
+      ],
+      "opening_date": null,
+      "deadline": null,
+      "status": "rolling",
+      "rolling_basis": true,
+      "early_closure_note": "Rolling intake — apply when roles appear on their site.",
+      "url": "https://www.mottmac.com/careers/graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "jacobs-grad-2027",
+      "employer": "Jacobs",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Mechanical Engineering",
+        "Chemical Engineering",
+        "Electrical & Electronics"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-02-28",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.jacobs.com/students-and-graduates/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "aecom-grad-2027",
+      "employer": "AECOM",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics"
+      ],
+      "opening_date": null,
+      "deadline": null,
+      "status": "rolling",
+      "rolling_basis": true,
+      "early_closure_note": "Roles posted on a rolling basis — check regularly.",
+      "url": "https://www.aecom.com/careers/students-and-graduates/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "balfour-beatty-grad-2027",
+      "employer": "Balfour Beatty",
+      "scheme_name": "Graduate Training Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-02-28",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://jobs.balfourbeatty.com/early-careers",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "laing-orourke-grad-2027",
+      "employer": "Laing O'Rourke",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Mechanical Engineering",
+        "Systems Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.laingorourke.com/careers/graduates/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "network-rail-grad-2027",
+      "employer": "Network Rail",
+      "scheme_name": "Graduate Scheme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Electrical & Electronics",
+        "Systems Engineering",
+        "Mechanical Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-11-30",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": "High demand — apply promptly when scheme opens.",
+      "url": "https://www.networkrail.co.uk/careers/early-careers/graduate-programme/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "national-highways-grad-2027",
+      "employer": "National Highways",
+      "scheme_name": "Graduate Scheme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Systems Engineering",
+        "Electrical & Electronics"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.nationalhighways.co.uk/careers/early-careers/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "tfl-grad-2027",
+      "employer": "Transport for London",
+      "scheme_name": "Graduate Engineering Scheme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Civil Engineering",
+        "Electrical & Electronics",
+        "Systems Engineering",
+        "Mechanical Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.tfl.gov.uk/students-and-graduates/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "jlr-grad-2027",
+      "employer": "Jaguar Land Rover",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Software Engineering",
+        "Systems Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.jaguarlandrover.com/careers/graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "dyson-grad-2027",
+      "employer": "Dyson",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Software Engineering",
+        "Robotics & Automation"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.dyson.com/graduate-programs",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "renishaw-grad-2027",
+      "employer": "Renishaw",
+      "scheme_name": "Graduate Development Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Mechanical Engineering",
+        "Software Engineering",
+        "Robotics & Automation",
+        "Biomedical Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-02-28",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.renishaw.com/en/graduate-development-programme--6462",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "bp-grad-2027",
+      "employer": "BP",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Chemical Engineering",
+        "Mechanical Engineering",
+        "Software Engineering",
+        "Renewable Energy"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": "Often fills ahead of the stated deadline.",
+      "url": "https://www.bp.com/en/global/corporate/careers/students-and-graduates.html",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "shell-grad-2027",
+      "employer": "Shell",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Chemical Engineering",
+        "Mechanical Engineering",
+        "Renewable Energy",
+        "Software Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2026-11-30",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": "Historically closes in November — apply immediately on opening.",
+      "url": "https://www.shell.co.uk/careers/students-and-graduates.html",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "johnson-matthey-grad-2027",
+      "employer": "Johnson Matthey",
+      "scheme_name": "Graduate Scheme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Chemical Engineering",
+        "Mechanical Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-02-28",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://matthey.com/en/careers/graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "wood-grad-2027",
+      "employer": "Wood",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Chemical Engineering",
+        "Mechanical Engineering",
+        "Renewable Energy",
+        "Civil Engineering"
+      ],
+      "opening_date": null,
+      "deadline": null,
+      "status": "rolling",
+      "rolling_basis": true,
+      "early_closure_note": "Roles posted on a rolling basis throughout the year.",
+      "url": "https://www.woodplc.com/careers/students-and-graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "medtronic-grad-2027",
+      "employer": "Medtronic",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Biomedical Engineering",
+        "Mechanical Engineering",
+        "Software Engineering",
+        "Electrical & Electronics"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://jobs.medtronic.com/jobs/student-and-graduate",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "smith-nephew-grad-2027",
+      "employer": "Smith & Nephew",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Biomedical Engineering",
+        "Mechanical Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-02-28",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.smith-nephew.com/early-careers",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "siemens-healthineers-grad-2027",
+      "employer": "Siemens Healthineers",
+      "scheme_name": "Graduate Engineer",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Biomedical Engineering",
+        "Electrical & Electronics",
+        "Software Engineering",
+        "Systems Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.siemens-healthineers.com/en-uk/careers/students-graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "ge-healthcare-grad-2027",
+      "employer": "GE HealthCare",
+      "scheme_name": "Engineering Graduate Programme",
+      "category": "Graduate Scheme",
+      "disciplines": [
+        "Biomedical Engineering",
+        "Electrical & Electronics",
+        "Software Engineering"
+      ],
+      "opening_date": "2026-09-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.gehealthcare.com/students-and-graduates",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "atkins-placement-2027",
+      "employer": "Atkins (SNC-Lavalin)",
+      "scheme_name": "Year in Industry Placement",
+      "category": "Industrial Placement",
+      "disciplines": [
+        "Civil Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-02-28",
+      "status": "open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.atkins.com/early-careers",
+      "last_verified": "2026-06-24",
+      "last_scraped": "2026-06-24"
+    },
+    {
+      "id": "rolls-royce-placement-2027",
+      "employer": "Rolls-Royce",
+      "scheme_name": "Year in Industry",
+      "category": "Industrial Placement",
+      "disciplines": [
+        "Aerospace Engineering",
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Software Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.rolls-royce.com/united-kingdom/students",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "bae-systems-placement-2027",
+      "employer": "BAE Systems",
+      "scheme_name": "Year in Industry",
+      "category": "Industrial Placement",
+      "disciplines": [
+        "Aerospace Engineering",
+        "Mechanical Engineering",
+        "Software Engineering",
+        "Systems Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-02-28",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.baesystems.com/en/careers/careers-in-the-uk/students",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "jlr-placement-2027",
+      "employer": "Jaguar Land Rover",
+      "scheme_name": "Year in Industry",
+      "category": "Industrial Placement",
+      "disciplines": [
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Software Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.jaguarlandrover.com/careers/students",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "astrazeneca-placement-2027",
+      "employer": "AstraZeneca",
+      "scheme_name": "Industrial Placement",
+      "category": "Industrial Placement",
+      "disciplines": [
+        "Chemical Engineering",
+        "Biomedical Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": "Competitive — apply as early as possible after opening.",
+      "url": "https://careers.astrazeneca.com/students",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "gsk-placement-2027",
+      "employer": "GSK",
+      "scheme_name": "Industrial Placement",
+      "category": "Industrial Placement",
+      "disciplines": [
+        "Chemical Engineering",
+        "Biomedical Engineering",
+        "Mechanical Engineering"
+      ],
+      "opening_date": "2026-10-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.gsk.com/en-gb/careers/students-and-graduates/",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "siemens-summer-2027",
+      "employer": "Siemens",
+      "scheme_name": "Summer Internship Programme",
+      "category": "Summer Internship",
+      "disciplines": [
+        "Mechanical Engineering",
+        "Electrical & Electronics",
+        "Software Engineering",
+        "Robotics & Automation"
+      ],
+      "opening_date": "2026-11-01",
+      "deadline": "2027-01-31",
+      "status": "open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.siemens.com/uk/en/company/jobs/students-graduates.html",
+      "last_verified": "2026-06-24",
+      "last_scraped": "2026-06-24"
+    },
+    {
+      "id": "bp-summer-2027",
+      "employer": "BP",
+      "scheme_name": "Engineering Summer Internship",
+      "category": "Summer Internship",
+      "disciplines": [
+        "Chemical Engineering",
+        "Mechanical Engineering",
+        "Software Engineering",
+        "Renewable Energy"
+      ],
+      "opening_date": "2026-11-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.bp.com/en/global/corporate/careers/students-and-graduates.html",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "shell-summer-2027",
+      "employer": "Shell",
+      "scheme_name": "Engineering Summer Internship",
+      "category": "Summer Internship",
+      "disciplines": [
+        "Chemical Engineering",
+        "Mechanical Engineering",
+        "Renewable Energy"
+      ],
+      "opening_date": "2026-11-01",
+      "deadline": "2027-01-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.shell.co.uk/careers/students-and-graduates.html",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "national-grid-summer-2027",
+      "employer": "National Grid",
+      "scheme_name": "Engineering Summer Internship",
+      "category": "Summer Internship",
+      "disciplines": [
+        "Electrical & Electronics",
+        "Renewable Energy",
+        "Systems Engineering"
+      ],
+      "opening_date": "2026-11-01",
+      "deadline": "2027-02-28",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.nationalgrid.com/early-careers",
+      "last_verified": null,
+      "last_scraped": null
+    },
+    {
+      "id": "rolls-royce-summer-2027",
+      "employer": "Rolls-Royce",
+      "scheme_name": "Summer Internship",
+      "category": "Summer Internship",
+      "disciplines": [
+        "Aerospace Engineering",
+        "Mechanical Engineering",
+        "Software Engineering"
+      ],
+      "opening_date": "2026-11-01",
+      "deadline": "2026-12-31",
+      "status": "not_yet_open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.rolls-royce.com/united-kingdom/students",
+      "last_verified": null,
+      "last_scraped": null
     }
   ]
 }
