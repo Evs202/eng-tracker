@@ -274,7 +274,7 @@ tbody tr:last-child { border-bottom: none; }
 tbody tr:hover { background: var(--grey-50); }
 
 td {
-  padding: 10px 12px;
+  padding: 5px 12px;
   vertical-align: middle;
 }
 
