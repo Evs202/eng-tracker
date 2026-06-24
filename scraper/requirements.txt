@@ -1,0 +1,5 @@
+requests==2.32.3
+beautifulsoup4==4.12.3
+playwright==1.44.0
+pytest==8.2.2
+pytest-playwright==0.5.1

@@ -1,0 +1,45 @@
+// Auto-generated from deadlines.json — edit deadlines.json, not this file.
+// This file lets the site work when opened directly without a server.
+const DEADLINES_DATA = {
+  "employers": [
+    {
+      "id": "rolls-royce-engineering-2027",
+      "employer": "Rolls-Royce",
+      "scheme_name": "Engineering Graduate Scheme",
+      "disciplines": ["Mechanical", "Aerospace", "Electrical"],
+      "deadline": "2026-12-05",
+      "status": "open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://careers.rolls-royce.com/united-kingdom/graduates",
+      "last_verified": "2026-06-24",
+      "last_scraped": "2026-06-24"
+    },
+    {
+      "id": "bae-systems-engineering-2027",
+      "employer": "BAE Systems",
+      "scheme_name": "Engineering Graduate Scheme",
+      "disciplines": ["Mechanical", "Aerospace", "Electrical", "Chemical"],
+      "deadline": "2027-01-15",
+      "status": "open",
+      "rolling_basis": false,
+      "early_closure_note": null,
+      "url": "https://www.baesystems.com/en/careers/careers-in-the-uk/graduates",
+      "last_verified": "2026-06-24",
+      "last_scraped": "2026-06-24"
+    },
+    {
+      "id": "arup-engineering-2027",
+      "employer": "Arup",
+      "scheme_name": "Graduate Engineer Programme",
+      "disciplines": ["Civil", "Mechanical", "Electrical"],
+      "deadline": null,
+      "status": "rolling",
+      "rolling_basis": true,
+      "early_closure_note": "Closes when full — typically fills by November. Apply early.",
+      "url": "https://www.arup.com/careers/graduates",
+      "last_verified": "2026-06-24",
+      "last_scraped": "2026-06-24"
+    }
+  ]
+};

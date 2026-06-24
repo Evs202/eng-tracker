@@ -1,0 +1,28 @@
+{
+  "employers": [
+    {
+      "id": "rolls-royce-engineering-2027",
+      "name": "Rolls-Royce",
+      "url": "https://careers.rolls-royce.com/united-kingdom/graduates",
+      "deadline_selector": null,
+      "notes": "TODO: find CSS selector for deadline date on this page. Use browser DevTools: right-click the deadline text → Inspect → copy selector.",
+      "requires_js": false
+    },
+    {
+      "id": "bae-systems-engineering-2027",
+      "name": "BAE Systems",
+      "url": "https://www.baesystems.com/en/careers/careers-in-the-uk/graduates",
+      "deadline_selector": null,
+      "notes": "TODO: find CSS selector",
+      "requires_js": true
+    },
+    {
+      "id": "arup-engineering-2027",
+      "name": "Arup",
+      "url": "https://www.arup.com/careers/graduates",
+      "deadline_selector": null,
+      "notes": "Rolling basis — scraper should always set status=rolling, rolling_basis=true",
+      "requires_js": false
+    }
+  ]
+}
