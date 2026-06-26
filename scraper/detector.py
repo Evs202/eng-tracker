@@ -226,8 +226,13 @@ def run_detector():
 
     now = datetime.now(timezone.utc).isoformat()
 
+    chromium_path = os.environ.get("PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH")
+    launch_kwargs = {"headless": True}
+    if chromium_path:
+        launch_kwargs["executable_path"] = chromium_path
+
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=True)
+        browser = pw.chromium.launch(**launch_kwargs)
         context = browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         )
