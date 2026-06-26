@@ -169,22 +169,16 @@ def detect_ats_from_url(url):
 def is_workday_url(url):
     return "myworkday.com" in url.lower() or "myworkdayjobs.com" in url.lower()
 
-def fetch_workday_api(url):
+def fetch_workday_api(api_url):
     """
-    For Workday URLs, query the public search API directly with requests.
-    Datacenter IPs are blocked by Workday's Cloudflare on browser requests
-    but the JSON API endpoint is accessible.
-    Returns (text_content, url, http_status).
+    Query the Workday CXS jobs API directly with requests (no browser needed).
+    api_url must be the full CXS endpoint, e.g.:
+        https://baesystems.wd3.myworkdayjobs.com/wday/cxs/baesystems/External/jobs
+    Discovered per-company by scraper/discover_workday_sites.py.
+    Returns (text_content, api_url, http_status).
     """
     import requests
-    from urllib.parse import urlparse
 
-    parsed = urlparse(url)
-    host   = parsed.netloc.lower()
-    parts  = parsed.path.strip("/").split("/")
-    tenant = parts[0] if parts else host.split(".")[0]
-
-    api_url = f"https://{host}/{tenant}/fs/searchPaginated"
     headers = {
         "Content-Type": "application/json",
         "Accept":       "application/json",
@@ -192,6 +186,7 @@ def fetch_workday_api(url):
     }
 
     all_titles = []
+    last_status = 0
     for keyword in ["graduate", "intern", "placement"]:
         try:
             resp = requests.post(
@@ -200,6 +195,7 @@ def fetch_workday_api(url):
                 headers=headers,
                 timeout=15,
             )
+            last_status = resp.status_code
             if resp.status_code == 200:
                 data = resp.json()
                 for job in data.get("jobPostings", []):
@@ -210,10 +206,10 @@ def fetch_workday_api(url):
             pass
 
     if not all_titles:
-        return None, url, 0
+        return None, api_url, last_status or 0
 
     text = " ".join(all_titles)
-    return text, url, 200
+    return text, api_url, 200
 
 # ── Page fetching ─────────────────────────────────────────────────────────────
 
@@ -299,11 +295,14 @@ def run_detector():
 
             prev_hash = get_previous_hash(con, cid)
 
-            # Workday subdomains block headless browsers from datacenter IPs
-            # — use the REST API directly instead
-            if is_workday_url(url):
-                log(f"  Workday API route")
-                text, final_url, status = fetch_workday_api(url)
+            # Workday subdomains block headless browsers from datacenter IPs.
+            # Use the CXS REST API when we have the exact endpoint (discovered
+            # by scraper/discover_workday_sites.py), otherwise fall back to
+            # Playwright on the main careers page.
+            workday_api = company.get("workday_api_url", "").strip()
+            if workday_api:
+                log(f"  Workday CXS API route")
+                text, final_url, status = fetch_workday_api(workday_api)
             else:
                 text, final_url, status = fetch_page(page, url)
                 # Detect ATS from final URL if redirected to known ATS
