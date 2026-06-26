@@ -33,13 +33,16 @@ GitHub Action: Sheet 2 → deadlines.js → Vercel deploy
 - [ ] Store in Google Sheet (Sheet 1)
 - Columns: id | employer | careers_url | ats_type | disciplines | verified
 
-### Phase 2 — Change detector
-- [ ] Python + Playwright script
-- [ ] Visits each careers URL every 6 hours
-- [ ] Stores MD5 hash of page content in SQLite
-- [ ] On change: searches for keywords (graduate, 2027, scheme, applications open)
-- [ ] Flags matches for ATS parser
+### Phase 2 — Change detector (DONE)
+- [x] Python + Playwright script
+- [x] Visits each careers URL every 6 hours
+- [x] Stores MD5 hash of page content in SQLite
+- [x] On change: searches for keywords (graduate, 2027, scheme, applications open)
+- [x] Flags matches for ATS parser — outputs scraper/output/flagged.json
+- [x] Tested on Rolls-Royce, BAE Systems, Airbus — working
 - File: scraper/detector.py
+- Run: python scraper/detector.py
+- Report: python scraper/detector.py --report
 
 ### Phase 3 — ATS parsers
 - [ ] Workday parser — covers ~40% of targets
@@ -90,6 +93,8 @@ GitHub Action: Sheet 2 → deadlines.js → Vercel deploy
 - /SPEC.md — this file
 
 ## Current Status
-Phase 1 in progress. Company list being built.
+Phase 1 DONE — 237 companies in scraper/output/companies.csv
+Phase 2 DONE — detector.py built and tested
+Phase 3 NEXT — build Workday parser (covers ~81 companies)
 
 ## Start each session by reading this file.
