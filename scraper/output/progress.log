@@ -1,0 +1,59 @@
+=== Gradcracker employer seed scraper v2 ===
+
+
+Scraping discipline: aerospace-aeronautical
+  [aerospace-aeronautical] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Scraping discipline: chemical-process
+  [chemical-process] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Scraping discipline: civil-structural
+  [civil-structural] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Scraping discipline: electrical-electronic
+  [electrical-electronic] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Scraping discipline: mechanical
+  [mechanical] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Scraping discipline: biomedical-biotechnology
+  [biomedical-biotechnology] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Scraping discipline: software-it
+  [software-it] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Scraping discipline: systems-control
+  [systems-control] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Scraping discipline: energy-renewables
+  [energy-renewables] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Scraping discipline: robotics-automation
+  [robotics-automation] page 1
+  No hub links on page 1 — stopping discipline.
+  Found 0 unique employers
+
+Total unique employer hubs: 0
+Fetching employer names and careers URLs...
+
+
+✓ Done. 0 employers written to:
+  C:\Users\grish\Desktop\eng-tracker\scraper\output\employers_seed.csv

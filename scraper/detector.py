@@ -164,6 +164,57 @@ def detect_ats_from_url(url):
         return "BambooHR"
     return None  # unknown — keep existing
 
+# ── Workday API fetch (bypasses Playwright for datacenter IPs) ────────────────
+
+def is_workday_url(url):
+    return "myworkday.com" in url.lower() or "myworkdayjobs.com" in url.lower()
+
+def fetch_workday_api(url):
+    """
+    For Workday URLs, query the public search API directly with requests.
+    Datacenter IPs are blocked by Workday's Cloudflare on browser requests
+    but the JSON API endpoint is accessible.
+    Returns (text_content, url, http_status).
+    """
+    import requests
+    from urllib.parse import urlparse
+
+    parsed = urlparse(url)
+    host   = parsed.netloc.lower()
+    parts  = parsed.path.strip("/").split("/")
+    tenant = parts[0] if parts else host.split(".")[0]
+
+    api_url = f"https://{host}/{tenant}/fs/searchPaginated"
+    headers = {
+        "Content-Type": "application/json",
+        "Accept":       "application/json",
+        "User-Agent":   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    }
+
+    all_titles = []
+    for keyword in ["graduate", "intern", "placement"]:
+        try:
+            resp = requests.post(
+                api_url,
+                json={"appliedFacets": {}, "limit": 20, "offset": 0, "searchText": keyword},
+                headers=headers,
+                timeout=15,
+            )
+            if resp.status_code == 200:
+                data = resp.json()
+                for job in data.get("jobPostings", []):
+                    title = job.get("title", "")
+                    if title:
+                        all_titles.append(title)
+        except Exception:
+            pass
+
+    if not all_titles:
+        return None, url, 0
+
+    text = " ".join(all_titles)
+    return text, url, 200
+
 # ── Page fetching ─────────────────────────────────────────────────────────────
 
 def fetch_page(page, url):
@@ -248,13 +299,18 @@ def run_detector():
 
             prev_hash = get_previous_hash(con, cid)
 
-            text, final_url, status = fetch_page(page, url)
-
-            # Detect ATS from final URL if redirected to known ATS
-            detected_ats = detect_ats_from_url(final_url)
-            if detected_ats and detected_ats != ats:
-                log(f"  ATS detected from redirect: {ats} → {detected_ats}")
-                ats = detected_ats
+            # Workday subdomains block headless browsers from datacenter IPs
+            # — use the REST API directly instead
+            if is_workday_url(url):
+                log(f"  Workday API route")
+                text, final_url, status = fetch_workday_api(url)
+            else:
+                text, final_url, status = fetch_page(page, url)
+                # Detect ATS from final URL if redirected to known ATS
+                detected_ats = detect_ats_from_url(final_url)
+                if detected_ats and detected_ats != ats:
+                    log(f"  ATS detected from redirect: {ats} → {detected_ats}")
+                    ats = detected_ats
 
             current_hash = hash_content(text)
             error_msg = "" if status else "fetch_failed"

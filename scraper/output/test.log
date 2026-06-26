@@ -1,0 +1,10 @@
+[2026-06-26 16:57:59 UTC] [INFO] Loaded 3 companies from scraper\output\companies_test.csv
+[2026-06-26 16:58:00 UTC] [INFO] [1/3] Rolls-Royce — https://careers.rolls-royce.com
+[2026-06-26 16:58:13 UTC] [INFO]   NEW — first visit, storing hash
+[2026-06-26 16:58:13 UTC] [INFO]   Keywords on first visit: ['graduate programme', 'graduate program', 'school leaver']
+[2026-06-26 16:58:15 UTC] [INFO] [2/3] BAE Systems — https://www.baesystems.com/en/careers
+[2026-06-26 16:58:17 UTC] [WARN]   HTTP 403
+[2026-06-26 16:58:17 UTC] [INFO]   NEW — first visit, storing hash
+[2026-06-26 16:58:19 UTC] [INFO] [3/3] Airbus — https://www.airbus.com/en/careers
+[2026-06-26 16:58:22 UTC] [INFO]   NEW — first visit, storing hash
+[2026-06-26 16:58:22 UTC] [INFO]   Keywords on first visit: ['graduate programme', 'graduate program', '2027']
