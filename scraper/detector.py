@@ -255,7 +255,7 @@ def load_companies():
         log(f"companies.csv not found at {COMPANIES_CSV}", "ERROR")
         sys.exit(1)
     companies = []
-    with open(COMPANIES_CSV, encoding="utf-8") as f:
+    with open(COMPANIES_CSV, encoding="utf-8-sig") as f:
         for row in csv.DictReader(f):
             companies.append(row)
     return companies

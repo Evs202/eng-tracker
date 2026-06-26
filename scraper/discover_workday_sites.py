@@ -49,7 +49,7 @@ def discover_site_name(page, url, timeout=20000):
 def main():
     from playwright.sync_api import sync_playwright
 
-    rows = list(csv.DictReader(open(COMPANIES_CSV, encoding="utf-8")))
+    rows = list(csv.DictReader(open(COMPANIES_CSV, encoding="utf-8-sig")))
     workday_rows = [r for r in rows if r["ats_type"] == "Workday"]
     print(f"Found {len(workday_rows)} Workday companies")
 
