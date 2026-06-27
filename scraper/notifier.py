@@ -106,16 +106,6 @@ def send_alert(flagged: list) -> bool:
         "html":    html_body,
     }).encode("utf-8")
 
-    req = urllib.request.Request(
-        RESEND_API_URL,
-        data=payload,
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type":  "application/json",
-        },
-        method="POST",
-    )
-
     import subprocess
     try:
         result = subprocess.run([
