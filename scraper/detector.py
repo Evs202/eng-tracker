@@ -295,21 +295,18 @@ def run_detector():
 
             prev_hash = get_previous_hash(con, cid)
 
-            # Workday subdomains block headless browsers from datacenter IPs.
-            # Use the CXS REST API when we have the exact endpoint (discovered
-            # by scraper/discover_workday_sites.py), otherwise fall back to
-            # Playwright on the main careers page.
-            workday_api = company.get("workday_api_url", "").strip()
-            if workday_api:
-                log(f"  Workday CXS API route")
-                text, final_url, status = fetch_workday_api(workday_api)
-            else:
-                text, final_url, status = fetch_page(page, url)
-                # Detect ATS from final URL if redirected to known ATS
-                detected_ats = detect_ats_from_url(final_url)
-                if detected_ats and detected_ats != ats:
-                    log(f"  ATS detected from redirect: {ats} → {detected_ats}")
-                    ats = detected_ats
+            # Workday blocks datacenter IPs — skip and log for manual follow-up.
+            if ats == "Workday":
+                log(f"  SKIP — Workday blocks VPS IPs (manual check needed)", "WARN")
+                time.sleep(DELAY_BETWEEN)
+                continue
+
+            text, final_url, status = fetch_page(page, url)
+            # Detect ATS from final URL if redirected to known ATS
+            detected_ats = detect_ats_from_url(final_url)
+            if detected_ats and detected_ats != ats:
+                log(f"  ATS detected from redirect: {ats} → {detected_ats}")
+                ats = detected_ats
 
             current_hash = hash_content(text)
             error_msg = "" if status else "fetch_failed"
@@ -374,6 +371,11 @@ def run_detector():
     # Write flagged entries for notification system (Phase 4)
     with open(FLAGGED_PATH, "w", encoding="utf-8") as f:
         json.dump(flagged, f, indent=2)
+
+    # Send email alert
+    if flagged:
+        from scraper.notifier import send_alert
+        send_alert(flagged)
 
     # Summary
     log("-" * 60)
