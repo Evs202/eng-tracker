@@ -10,8 +10,6 @@ Environment variables required (set on VPS):
 
 import json
 import os
-import urllib.request
-import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -118,15 +116,26 @@ def send_alert(flagged: list) -> bool:
         method="POST",
     )
 
+    import subprocess
     try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            result = json.loads(resp.read())
-            print(f"[notifier] Email sent — id={result.get('id')}")
+        result = subprocess.run([
+            "curl", "-s", "-w", "\n%{http_code}",
+            "-X", "POST",
+            "-H", f"Authorization: Bearer {api_key}",
+            "-H", "Content-Type: application/json",
+            "-d", payload.decode("utf-8"),
+            RESEND_API_URL,
+        ], capture_output=True, text=True, timeout=20)
+        lines = result.stdout.strip().split("\n")
+        status = int(lines[-1]) if lines else 0
+        body = "\n".join(lines[:-1])
+        if status == 200:
+            data = json.loads(body)
+            print(f"[notifier] Email sent — id={data.get('id')}")
             return True
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", errors="replace")
-        print(f"[notifier] HTTP {e.code}: {body}")
-        return False
+        else:
+            print(f"[notifier] HTTP {status}: {body}")
+            return False
     except Exception as e:
         print(f"[notifier] Error: {e}")
         return False
