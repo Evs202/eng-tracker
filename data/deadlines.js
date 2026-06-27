@@ -93,8 +93,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.airbus.com/en/careers/students-and-graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Bristol",
         "Broughton"
@@ -116,8 +116,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.gknaerospace.com/careers/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Birmingham",
         "Bristol"
@@ -140,8 +140,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.thalesgroup.com/en/united-kingdom/careers",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Glasgow",
         "London",
@@ -165,8 +165,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://uk.leonardocompany.com/en/-/careers",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Edinburgh",
         "Yeovil"
@@ -190,8 +190,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.mbda-systems.com/careers/graduates/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Stevenage",
         "Bristol"
@@ -215,8 +215,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": "Fills quickly — early application recommended.",
       "url": "https://careers.qinetiq.com/early-careers",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Farnborough"
       ]
@@ -238,8 +238,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.babcock.com/early-careers/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Plymouth",
         "Bristol"
@@ -262,8 +262,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": "Historically closes early — apply in September.",
       "url": "https://careers.nationalgrid.com/early-careers",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Warwick",
         "London"
@@ -286,8 +286,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.sse.com/careers/graduates-and-apprentices/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Perth",
         "Various UK"
@@ -310,8 +310,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.edfenergy.com/careers/graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Gloucester",
         "London"
@@ -334,8 +334,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://orsted.com/en/careers/students-and-graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London"
       ]
@@ -356,8 +356,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.scottishpower.com/early-careers",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Glasgow"
       ]
@@ -378,8 +378,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.rwe.com/en/careers/students-and-graduates/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Swindon",
         "London"
@@ -402,8 +402,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.centrica.com/early-careers",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Windsor"
       ]
@@ -425,8 +425,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.abb/global/en/students",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Various UK"
       ]
@@ -448,8 +448,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.se.com/uk/en/about-us/careers/student-opportunities/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Coventry",
         "London"
@@ -472,8 +472,8 @@ const DEADLINES_DATA = {
       "rolling_basis": true,
       "early_closure_note": "Roles posted year-round — vacancies fill throughout the year.",
       "url": "https://www.wsp.com/en-GB/careers/graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London",
         "Various UK"
@@ -496,8 +496,8 @@ const DEADLINES_DATA = {
       "rolling_basis": true,
       "early_closure_note": "Rolling intake — apply when roles appear on their site.",
       "url": "https://www.mottmac.com/careers/graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Croydon",
         "Various UK"
@@ -520,8 +520,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.jacobs.com/students-and-graduates/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Various UK"
       ]
@@ -542,8 +542,8 @@ const DEADLINES_DATA = {
       "rolling_basis": true,
       "early_closure_note": "Roles posted on a rolling basis — check regularly.",
       "url": "https://www.aecom.com/careers/students-and-graduates/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London",
         "Various UK"
@@ -565,8 +565,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://jobs.balfourbeatty.com/early-careers",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London",
         "Various UK"
@@ -588,8 +588,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.laingorourke.com/careers/graduates/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Dartford"
       ]
@@ -611,8 +611,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": "High demand — apply promptly when scheme opens.",
       "url": "https://www.networkrail.co.uk/careers/early-careers/graduate-programme/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London",
         "York",
@@ -635,8 +635,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.nationalhighways.co.uk/careers/early-careers/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Birmingham"
       ]
@@ -658,8 +658,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.tfl.gov.uk/students-and-graduates/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London"
       ]
@@ -681,8 +681,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.jaguarlandrover.com/careers/graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Coventry",
         "Solihull"
@@ -705,8 +705,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.dyson.com/graduate-programs",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Malmesbury"
       ]
@@ -728,8 +728,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.renishaw.com/en/graduate-development-programme--6462",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Wotton-under-Edge"
       ]
@@ -751,8 +751,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": "Often fills ahead of the stated deadline.",
       "url": "https://www.bp.com/en/global/corporate/careers/students-and-graduates.html",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London",
         "Aberdeen"
@@ -775,8 +775,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": "Historically closes in November — apply immediately on opening.",
       "url": "https://www.shell.co.uk/careers/students-and-graduates.html",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London"
       ]
@@ -796,8 +796,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://matthey.com/en/careers/graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London",
         "Royston"
@@ -820,8 +820,8 @@ const DEADLINES_DATA = {
       "rolling_basis": true,
       "early_closure_note": "Roles posted on a rolling basis throughout the year.",
       "url": "https://www.woodplc.com/careers/students-and-graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Aberdeen",
         "Various UK"
@@ -844,8 +844,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://jobs.medtronic.com/jobs/student-and-graduate",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Various UK"
       ]
@@ -865,8 +865,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.smith-nephew.com/early-careers",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Hull",
         "London"
@@ -889,8 +889,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.siemens-healthineers.com/en-uk/careers/students-graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Oxford",
         "London"
@@ -912,8 +912,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.gehealthcare.com/students-and-graduates",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Chalfont St Giles"
       ]
@@ -957,8 +957,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.rolls-royce.com/united-kingdom/students",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Derby",
         "Bristol"
@@ -981,8 +981,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.baesystems.com/en/careers/careers-in-the-uk/students",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Various UK"
       ]
@@ -1003,8 +1003,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.jaguarlandrover.com/careers/students",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Coventry",
         "Solihull"
@@ -1025,8 +1025,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": "Competitive — apply as early as possible after opening.",
       "url": "https://careers.astrazeneca.com/students",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Cambridge",
         "Macclesfield"
@@ -1048,8 +1048,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.gsk.com/en-gb/careers/students-and-graduates/",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Stevenage",
         "Brentford"
@@ -1095,8 +1095,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.bp.com/en/global/corporate/careers/students-and-graduates.html",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London",
         "Aberdeen"
@@ -1118,8 +1118,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://www.shell.co.uk/careers/students-and-graduates.html",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "London"
       ]
@@ -1140,8 +1140,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.nationalgrid.com/early-careers",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Warwick",
         "London"
@@ -1163,8 +1163,8 @@ const DEADLINES_DATA = {
       "rolling_basis": false,
       "early_closure_note": null,
       "url": "https://careers.rolls-royce.com/united-kingdom/students",
-      "last_verified": "2026-06-26",
-      "last_scraped": "2026-06-26",
+      "last_verified": "2026-06-27",
+      "last_scraped": "2026-06-27",
       "locations": [
         "Derby",
         "Bristol"
