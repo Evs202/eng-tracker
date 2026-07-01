@@ -104,8 +104,10 @@ function rowHTML(e) {
     ? `⚠️ ${e.early_closure_note}`
     : (e.rolling_basis ? 'Rolling — apply early' : '');
 
+  const closedClass = e.status === 'closed' ? ' class="row-closed"' : '';
+
   return `
-    <tr>
+    <tr${closedClass}>
       <td>
         <select class="status-select" id="status-${e.id}" onchange="onStatusChange('${e.id}', this)">
           ${STATUSES.map(s => `<option value="${s}">${s}</option>`).join('')}
