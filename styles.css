@@ -1,8 +1,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --blue: #2563eb;
-  --blue-light: #eff6ff;
+  --blue: #3f83e0;
+  --blue-light: #eaf3fc;
   --green: #16a34a;
   --green-light: #f0fdf4;
   --amber: #d97706;
@@ -18,9 +18,13 @@
   --grey-600: #4b5563;
   --grey-900: #111827;
   --radius: 8px;
-  --navy: #0b2545;
-  --navy-dark: #081b34;
-  --teal: #14b8a6;
+  --navy: #0f2a7a;
+  --navy-dark: #0a1c57;
+  --indigo: #4147a3;
+  --indigo-light: #eceeff;
+  --cornflower: #3f83e0;
+  --powder: #a9cedb;
+  --powder-light: #eaf3f6;
 }
 
 body {
@@ -52,7 +56,7 @@ body {
 }
 
 .brand-mark {
-  color: var(--teal);
+  color: var(--powder);
   font-size: 20px;
 }
 
@@ -100,7 +104,7 @@ header h1 { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; }
 .legend-key-btn {
   padding: 8px 16px;
   min-height: 40px;
-  background: var(--navy);
+  background: var(--indigo);
   color: white;
   border: none;
   border-radius: 999px;
@@ -108,7 +112,7 @@ header h1 { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; }
   font-weight: 600;
   cursor: pointer;
 }
-.legend-key-btn:hover { background: var(--navy-dark); }
+.legend-key-btn:hover { background: var(--navy); }
 
 .legend-key-tooltip {
   display: none;
@@ -157,7 +161,7 @@ header h1 { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; }
 }
 .pill:hover { background: var(--grey-200); }
 .pill.active {
-  background: var(--navy);
+  background: var(--indigo);
   color: white;
 }
 
@@ -368,7 +372,7 @@ tr.sector-row td {
 }
 tr.sector-row:hover td { background: var(--navy); }
 .sector-count {
-  color: var(--teal);
+  color: var(--powder);
   font-weight: 600;
   margin-left: 6px;
 }
