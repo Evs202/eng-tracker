@@ -2,18 +2,6 @@
 
 const STATUSES = ['Not started', 'Applied', 'Online Test', 'Interview', 'Offer', 'Rejected'];
 
-const DISC_EMOJI = {
-  'Aerospace Engineering':    '✈️',
-  'Biomedical Engineering':   '🧬',
-  'Chemical Engineering':     '⚗️',
-  'Civil Engineering':        '🏗️',
-  'Electrical & Electronics': '⚡',
-  'Mechanical Engineering':   '⚙️',
-  'Renewable Energy':         '☀️',
-  'Robotics & Automation':    '🤖',
-  'Software Engineering':     '💻',
-  'Systems Engineering':      '🔧',
-};
 const STALE_DAYS = 60;
 
 // Sector grouping — mirrors the "tier" grouping pattern (Bulge Bracket, Elite
@@ -42,7 +30,6 @@ function sectorFor(e) {
 
 let allEmployers = [];
 let currentSort = { field: 'deadline', dir: 'asc' };
-let currentDiscipline = 'all';
 let currentCategory = 'all';
 let currentOpenStatus = 'all';
 let currentSearch = '';
@@ -60,11 +47,6 @@ async function init() {
 
   document.getElementById('search-input').addEventListener('input', e => {
     currentSearch = e.target.value.trim().toLowerCase();
-    render();
-  });
-
-  document.getElementById('discipline-filter').addEventListener('change', e => {
-    currentDiscipline = e.target.value;
     render();
   });
 
@@ -131,7 +113,6 @@ function setupStickyScroll() {
 function render() {
   let rows = allEmployers;
   rows = filterByCategory(rows, currentCategory);
-  rows = filterByDiscipline(rows, currentDiscipline);
   rows = filterByOpenStatus(rows, currentOpenStatus);
   rows = filterBySearch(rows, currentSearch);
   rows = sort(rows, currentSort.field, currentSort.dir);
@@ -181,16 +162,13 @@ function groupedRowsHTML(rows) {
     const items = groups.get(sector);
     const header = `
       <tr class="sector-row">
-        <td colspan="9">${sector} <span class="sector-count">${items.length}</span></td>
+        <td colspan="8">${sector} <span class="sector-count">${items.length}</span></td>
       </tr>`;
     return header + items.map(rowHTML).join('');
   }).join('');
 }
 
 function rowHTML(e) {
-  const disciplines = (e.disciplines || []).map(d =>
-    `<span class="disc-emoji" title="${d}">${DISC_EMOJI[d] || d}</span>`
-  ).join('');
   const stale = isStale(e.last_verified) ? `<span class="stale-badge" title="Last verified ${e.last_verified}">OLD</span>` : '';
   const notes = e.early_closure_note
     ? `⚠️ ${e.early_closure_note}`
@@ -207,7 +185,6 @@ function rowHTML(e) {
       </td>
       <td><a class="employer-link" href="${e.url}" target="_blank" rel="noopener">${e.employer}</a></td>
       <td>${e.scheme_name}</td>
-      <td><div class="tags">${disciplines}</div></td>
       ${dateCellHTML(e.opening_date, false)}
       ${dateCellHTML(e.deadline, true, e, stale)}
       <td class="col-locations">${(e.locations || []).join(', ')}</td>
@@ -246,11 +223,6 @@ function dateCellHTML(dateStr, isDeadline, e, extra) {
 function filterByCategory(employers, cat) {
   if (cat === 'all') return employers;
   return employers.filter(e => e.category === cat);
-}
-
-function filterByDiscipline(employers, discipline) {
-  if (discipline === 'all') return employers;
-  return employers.filter(e => (e.disciplines || []).includes(discipline));
 }
 
 function filterByOpenStatus(employers, status) {
@@ -303,14 +275,12 @@ function setSort(field) {
 
 function resetFilters() {
   currentSearch = '';
-  currentDiscipline = 'all';
   currentCategory = 'all';
   currentOpenStatus = 'all';
   document.getElementById('search-input').value = '';
-  document.getElementById('discipline-filter').value = 'all';
   document.getElementById('status-filter').value = 'all';
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelector('.tab[data-category="all"]').classList.add('active');
+  document.querySelectorAll('.pill').forEach(t => t.classList.remove('active'));
+  document.querySelector('.pill[data-category="all"]').classList.add('active');
   render();
 }
 

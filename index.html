@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UK Engineering Tracker</title>
-  <meta name="description" content="All UK engineering graduate scheme deadlines in one place. Filter by discipline, sort by deadline, track your applications. No login required.">
+  <meta name="description" content="All UK engineering graduate scheme deadlines in one place, grouped by sector. Sort by deadline, track your applications. No login required.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -58,19 +58,6 @@
   <div class="controls">
     <div class="filters">
       <input id="search-input" type="text" placeholder="Search company or scheme…" autocomplete="off">
-      <select id="discipline-filter">
-        <option value="all">All disciplines</option>
-        <option value="Aerospace Engineering">Aerospace</option>
-        <option value="Biomedical Engineering">Biomedical</option>
-        <option value="Chemical Engineering">Chemical</option>
-        <option value="Civil Engineering">Civil</option>
-        <option value="Electrical & Electronics">Electrical & Electronics</option>
-        <option value="Mechanical Engineering">Mechanical</option>
-        <option value="Renewable Energy">Renewable Energy</option>
-        <option value="Robotics & Automation">Robotics & Automation</option>
-        <option value="Software Engineering">Software</option>
-        <option value="Systems Engineering">Systems</option>
-      </select>
       <select id="status-filter">
         <option value="all">Any status</option>
         <option value="open">Open now</option>
@@ -80,23 +67,6 @@
       </select>
     </div>
     <div class="actions">
-      <div class="disc-key-wrap">
-        <button class="disc-key-btn">🔑 Key</button>
-        <div class="disc-key-tooltip">
-          <div class="disc-key-grid">
-            <span>✈️</span><span>Aerospace</span>
-            <span>🧬</span><span>Biomedical</span>
-            <span>⚗️</span><span>Chemical</span>
-            <span>🏗️</span><span>Civil</span>
-            <span>⚡</span><span>Electrical &amp; Electronics</span>
-            <span>⚙️</span><span>Mechanical</span>
-            <span>☀️</span><span>Renewable Energy</span>
-            <span>🤖</span><span>Robotics &amp; Automation</span>
-            <span>💻</span><span>Software</span>
-            <span>🔧</span><span>Systems</span>
-          </div>
-        </div>
-      </div>
       <button id="export-btn" class="btn-secondary">⬇ Download tracker (CSV)</button>
       <a href="https://forms.gle/placeholder" target="_blank" rel="noopener" class="btn-link">Report a mistake</a>
     </div>
@@ -121,7 +91,6 @@
           <th class="col-status">My Status</th>
           <th class="col-employer">Employer</th>
           <th class="col-scheme">Scheme</th>
-          <th class="col-disciplines">Disciplines</th>
           <th class="col-opening sortable" id="sort-opening" onclick="setSort('opening_date')">
             Opens <span class="sort-icon"></span>
           </th>
@@ -134,7 +103,7 @@
         </tr>
       </thead>
       <tbody id="table-body">
-        <tr><td colspan="9" class="loading">Loading deadlines…</td></tr>
+        <tr><td colspan="8" class="loading">Loading deadlines…</td></tr>
       </tbody>
     </table>
   </div>
