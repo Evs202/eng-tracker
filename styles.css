@@ -297,21 +297,22 @@ select {
 }
 
 table {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 thead th {
   background: var(--grey-50);
-  padding: 10px 12px;
+  padding: 6px 10px;
   text-align: left;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--grey-600);
-  border-bottom: 1px solid var(--grey-200);
+  border: 1px solid var(--grey-200);
   white-space: nowrap;
 }
 
@@ -321,14 +322,14 @@ th.sort-active { color: var(--blue); }
 
 .sort-icon { margin-left: 4px; font-size: 10px; }
 
-tbody tr { border-bottom: 1px solid var(--grey-100); }
-tbody tr:last-child { border-bottom: none; }
 tbody tr:hover { background: var(--grey-50); }
 tbody tr.row-closed { opacity: 0.5; }
 
 td {
-  padding: 3px 12px;
+  padding: 2px 10px;
   vertical-align: middle;
+  border: 1px solid var(--grey-100);
+  white-space: nowrap;
 }
 
 /* Sector group header rows */
@@ -339,7 +340,9 @@ tr.sector-row td {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 8px 12px;
+  padding: 6px 10px;
+  border: 1px solid var(--navy);
+  white-space: nowrap;
 }
 tr.sector-row:hover td { background: var(--navy); }
 .sector-count {
@@ -356,22 +359,17 @@ td.date-cell.rolling {
   background: var(--amber-light);
 }
 
-/* Column widths */
-.col-status      { width: 120px; min-width: 120px; }
+/* Column widths — fixed so the table scrolls horizontally instead of wrapping */
+.col-status      { width: 120px; }
 .col-status select { min-height: 32px; font-size: 12px; }
-
-@media (max-width: 480px) {
-  .col-status      { width: 90px; min-width: 90px; }
-  .col-status select { font-size: 11px; padding: 4px 6px; }
-}
 .col-employer    { width: 140px; }
-.col-scheme      { min-width: 160px; }
+.col-scheme      { width: 200px; }
 .col-disciplines { width: 160px; }
 .col-opening     { width: 100px; }
 .col-deadline    { width: 100px; }
-.col-locations   { width: 140px; font-size: 13px; color: var(--grey-600); }
+.col-locations   { width: 180px; font-size: 13px; color: var(--grey-600); }
 .col-rolling     { width: 68px; text-align: center; }
-.col-notes       { min-width: 150px; color: var(--grey-600); font-size: 13px; }
+.col-notes       { width: 220px; color: var(--grey-600); font-size: 13px; white-space: normal; }
 
 /* Employer link */
 .employer-link {
