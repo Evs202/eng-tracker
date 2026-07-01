@@ -324,7 +324,7 @@ table {
 
 thead th {
   background: var(--grey-50);
-  padding: 6px 10px;
+  padding: 5px 8px;
   text-align: left;
   font-size: 11px;
   font-weight: 600;
@@ -344,11 +344,14 @@ th.sort-active { color: var(--blue); }
 tbody tr:hover { background: var(--grey-50); }
 tbody tr.row-closed { opacity: 0.5; }
 
+table#deadlines-table { font-size: 12px; }
+
 td {
-  padding: 2px 10px;
+  padding: 1px 8px;
   vertical-align: middle;
   border: 1px solid var(--grey-100);
   white-space: nowrap;
+  line-height: 1.3;
 }
 
 /* Sector group header rows */
@@ -379,8 +382,7 @@ td.date-cell.rolling {
 }
 
 /* Column widths — fixed so the table scrolls horizontally instead of wrapping */
-.col-status      { width: 120px; }
-.col-status select { min-height: 32px; font-size: 12px; }
+.col-status      { width: 110px; }
 .col-employer    { width: 140px; }
 .col-scheme      { width: 200px; }
 .col-disciplines { width: 160px; }
@@ -400,7 +402,7 @@ td.date-cell.rolling {
 
 /* Discipline emojis */
 .disc-emoji {
-  font-size: 16px;
+  font-size: 12px;
   cursor: default;
   line-height: 1;
 }
@@ -469,21 +471,23 @@ td.date-cell.rolling {
 /* Rolling column */
 .rolling-yes {
   color: var(--green);
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 700;
 }
 .rolling-no {
   color: var(--grey-400);
-  font-size: 16px;
+  font-size: 12px;
 }
 
 /* Status dropdown */
 .status-select {
   width: 100%;
-  padding: 4px 6px;
+  height: 22px;
+  min-height: 22px;
+  padding: 0 6px;
   border: 1px solid var(--grey-200);
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 11px;
   background: white;
   cursor: pointer;
 }
