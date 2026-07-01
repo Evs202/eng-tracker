@@ -206,9 +206,9 @@ function dateCellHTML(dateStr, isDeadline, e, extra) {
   const daysUntil = Math.ceil((date - Date.now()) / 86400000);
 
   if (isDeadline) {
-    const soon = daysUntil <= 30 && daysUntil > 0;
-    const cellCls = soon ? 'date-cell highlight-soon' : 'date-cell';
-    const spanCls = soon ? 'deadline-date soon' : 'deadline-date';
+    const notYetPassed = daysUntil > 0;
+    const cellCls = notYetPassed ? 'date-cell highlight-open' : 'date-cell highlight-past';
+    const spanCls = notYetPassed ? 'deadline-date' : 'deadline-date passed';
     return `<td class="${cellCls}"><span class="${spanCls}">${formatted}</span>${extra}</td>`;
   }
 

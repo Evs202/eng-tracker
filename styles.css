@@ -379,12 +379,20 @@ tr.sector-row:hover td { background: var(--navy); }
   margin-left: 6px;
 }
 
-/* Highlighted date cells — opening/closing soon */
+/* Highlighted date cells — opening soon */
 td.date-cell.highlight-soon {
   background: var(--green-light);
 }
 td.date-cell.rolling {
   background: var(--amber-light);
+}
+
+/* Closes column — green while the deadline hasn't passed, red once it has */
+td.date-cell.highlight-open {
+  background: var(--green-light);
+}
+td.date-cell.highlight-past {
+  background: var(--red-light);
 }
 
 /* Column widths — fixed so the table scrolls horizontally instead of wrapping */
@@ -407,7 +415,7 @@ td.date-cell.rolling {
 
 /* Date cells */
 .deadline-date { font-weight: 500; }
-.deadline-date.soon { color: var(--red); font-weight: 600; }
+.deadline-date.passed { color: var(--red); font-weight: 600; }
 .deadline-date.rolling { color: var(--amber); font-weight: 600; }
 .deadline-na { color: var(--grey-400); font-style: italic; }
 
