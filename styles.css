@@ -347,6 +347,8 @@ th.sort-active { color: var(--blue); }
 
 tbody tr:hover { background: var(--grey-50); }
 tbody tr.row-closed { opacity: 0.5; }
+tbody tr.row-stripe { background: var(--grey-50); }
+tbody tr.row-stripe:hover { background: var(--grey-100); }
 
 table#deadlines-table { font-size: 12px; }
 

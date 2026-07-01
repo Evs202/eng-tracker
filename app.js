@@ -164,17 +164,18 @@ function groupedRowsHTML(rows) {
       <tr class="sector-row">
         <td colspan="8">${sector} <span class="sector-count">${items.length}</span></td>
       </tr>`;
-    return header + items.map(rowHTML).join('');
+    return header + items.map((e, i) => rowHTML(e, i % 2 === 1)).join('');
   }).join('');
 }
 
-function rowHTML(e) {
+function rowHTML(e, isStripe) {
   const stale = isStale(e.last_verified) ? `<span class="stale-badge" title="Last verified ${e.last_verified}">OLD</span>` : '';
   const notes = e.early_closure_note
     ? `⚠️ ${e.early_closure_note}`
     : (e.rolling_basis ? 'Rolling — apply early' : '');
 
-  const closedClass = e.status === 'closed' ? ' class="row-closed"' : '';
+  const classes = [isStripe ? 'row-stripe' : '', e.status === 'closed' ? 'row-closed' : ''].filter(Boolean).join(' ');
+  const closedClass = classes ? ` class="${classes}"` : '';
 
   return `
     <tr${closedClass}>
