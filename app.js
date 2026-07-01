@@ -16,6 +16,30 @@ const DISC_EMOJI = {
 };
 const STALE_DAYS = 60;
 
+// Sector grouping — mirrors the "tier" grouping pattern (Bulge Bracket, Elite
+// Boutique, etc.) from finance trackers, adapted to engineering disciplines.
+// First matching discipline in this priority order determines the group.
+const SECTOR_PRIORITY = [
+  ['Aerospace Engineering',    'Aerospace & Defence'],
+  ['Civil Engineering',        'Infrastructure & Construction'],
+  ['Renewable Energy',         'Energy & Utilities'],
+  ['Chemical Engineering',     'Chemical & Process'],
+  ['Biomedical Engineering',   'Biomedical & Healthcare'],
+  ['Mechanical Engineering',   'Industrial & Manufacturing'],
+  ['Electrical & Electronics', 'Electronics & Technology'],
+  ['Software Engineering',     'Software & Technology'],
+  ['Systems Engineering',      'Systems & Automation'],
+  ['Robotics & Automation',    'Systems & Automation'],
+];
+
+function sectorFor(e) {
+  const disciplines = e.disciplines || [];
+  for (const [disc, sector] of SECTOR_PRIORITY) {
+    if (disciplines.includes(disc)) return sector;
+  }
+  return 'Other Engineering';
+}
+
 let allEmployers = [];
 let currentSort = { field: 'deadline', dir: 'asc' };
 let currentDiscipline = 'all';
@@ -49,9 +73,9 @@ async function init() {
     render();
   });
 
-  document.querySelectorAll('.tab').forEach(btn => {
+  document.querySelectorAll('.pill').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.pill').forEach(t => t.classList.remove('active'));
       btn.classList.add('active');
       currentCategory = btn.dataset.category;
       render();
@@ -83,7 +107,7 @@ function render() {
   }
 
   emptyState.classList.add('hidden');
-  tbody.innerHTML = rows.map(rowHTML).join('');
+  tbody.innerHTML = groupedRowsHTML(rows);
 
   rows.forEach(e => {
     const sel = document.getElementById(`status-${e.id}`);
@@ -93,6 +117,35 @@ function render() {
       sel.dataset.status = saved;
     }
   });
+}
+
+const SECTOR_ORDER = [
+  'Aerospace & Defence', 'Infrastructure & Construction', 'Energy & Utilities',
+  'Chemical & Process', 'Biomedical & Healthcare', 'Industrial & Manufacturing',
+  'Electronics & Technology', 'Software & Technology', 'Systems & Automation',
+  'Other Engineering',
+];
+
+function groupedRowsHTML(rows) {
+  const groups = new Map();
+  rows.forEach(e => {
+    const sector = sectorFor(e);
+    if (!groups.has(sector)) groups.set(sector, []);
+    groups.get(sector).push(e);
+  });
+
+  const orderedSectors = [...groups.keys()].sort(
+    (a, b) => SECTOR_ORDER.indexOf(a) - SECTOR_ORDER.indexOf(b)
+  );
+
+  return orderedSectors.map(sector => {
+    const items = groups.get(sector);
+    const header = `
+      <tr class="sector-row">
+        <td colspan="9">${sector} <span class="sector-count">${items.length}</span></td>
+      </tr>`;
+    return header + items.map(rowHTML).join('');
+  }).join('');
 }
 
 function rowHTML(e) {
@@ -116,29 +169,37 @@ function rowHTML(e) {
       <td><a class="employer-link" href="${e.url}" target="_blank" rel="noopener">${e.employer}</a></td>
       <td>${e.scheme_name}</td>
       <td><div class="tags">${disciplines}</div></td>
-      <td>${dateCellHTML(e.opening_date, false)}</td>
-      <td>${dateCellHTML(e.deadline, true, e)}${stale}</td>
+      ${dateCellHTML(e.opening_date, false)}
+      ${dateCellHTML(e.deadline, true, e, stale)}
       <td class="col-locations">${(e.locations || []).join(', ')}</td>
       <td class="col-rolling">${e.rolling_basis ? '<span class="rolling-yes">✓</span>' : '<span class="rolling-no">—</span>'}</td>
       <td class="col-notes">${notes}</td>
     </tr>`;
 }
 
-function dateCellHTML(dateStr, isDeadline, e) {
+function dateCellHTML(dateStr, isDeadline, e, extra) {
+  extra = extra || '';
   if (isDeadline && e && (e.status === 'rolling' || e.rolling_basis)) {
-    return `<span class="deadline-date rolling">Rolling</span>`;
+    return `<td class="date-cell rolling"><span class="deadline-date rolling">Rolling</span>${extra}</td>`;
   }
-  if (!dateStr) return `<span class="deadline-na">TBC</span>`;
+  if (!dateStr) return `<td class="date-cell"><span class="deadline-na">TBC</span>${extra}</td>`;
 
   const date = new Date(dateStr);
   const formatted = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  const daysUntil = Math.ceil((date - Date.now()) / 86400000);
 
   if (isDeadline) {
-    const daysLeft = Math.ceil((date - Date.now()) / 86400000);
-    const cls = daysLeft <= 30 && daysLeft > 0 ? 'deadline-date soon' : 'deadline-date';
-    return `<span class="${cls}">${formatted}</span>`;
+    const soon = daysUntil <= 30 && daysUntil > 0;
+    const cellCls = soon ? 'date-cell highlight-soon' : 'date-cell';
+    const spanCls = soon ? 'deadline-date soon' : 'deadline-date';
+    return `<td class="${cellCls}"><span class="${spanCls}">${formatted}</span>${extra}</td>`;
   }
-  return `<span class="deadline-date">${formatted}</span>`;
+
+  // Opening date: highlight if it opens within the next 30 days (upcoming)
+  // or has already opened (in the application window now).
+  const isImminent = daysUntil <= 30;
+  const cellCls = isImminent ? 'date-cell highlight-soon' : 'date-cell';
+  return `<td class="${cellCls}"><span class="deadline-date">${formatted}</span>${extra}</td>`;
 }
 
 // ── Filters ────────────────────────────────────────────────────────────────
