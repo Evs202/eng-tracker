@@ -390,7 +390,7 @@ td.date-cell.rolling {
 /* Column widths — fixed so the table scrolls horizontally instead of wrapping */
 .col-status      { width: 110px; }
 .col-employer    { width: 140px; }
-.col-scheme      { width: 200px; }
+.col-scheme      { width: 320px; white-space: normal; }
 .col-opening     { width: 100px; }
 .col-deadline    { width: 100px; }
 .col-locations   { width: 180px; font-size: 13px; color: var(--grey-600); }
