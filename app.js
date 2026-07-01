@@ -84,7 +84,46 @@ async function init() {
 
   document.getElementById('export-btn').addEventListener('click', exportCSV);
 
+  setupStickyScroll();
   render();
+}
+
+// ── Sticky horizontal scrollbar ───────────────────────────────────────────
+// Keeps a scrollbar pinned to the bottom of the viewport that mirrors the
+// table's native horizontal scroll, so it's always reachable on a tall page.
+
+function setupStickyScroll() {
+  const wrapper = document.getElementById('table-wrapper');
+  const sticky = document.getElementById('sticky-hscroll');
+  const stickyInner = document.getElementById('sticky-hscroll-inner');
+  const table = document.getElementById('deadlines-table');
+
+  let syncing = false;
+
+  function refresh() {
+    stickyInner.style.width = table.scrollWidth + 'px';
+    const needsScroll = table.scrollWidth > wrapper.clientWidth;
+    sticky.classList.toggle('visible', needsScroll);
+  }
+
+  wrapper.addEventListener('scroll', () => {
+    if (syncing) return;
+    syncing = true;
+    sticky.scrollLeft = wrapper.scrollLeft;
+    syncing = false;
+  });
+
+  sticky.addEventListener('scroll', () => {
+    if (syncing) return;
+    syncing = true;
+    wrapper.scrollLeft = sticky.scrollLeft;
+    syncing = false;
+  });
+
+  window.addEventListener('resize', refresh);
+  new MutationObserver(refresh).observe(table, { childList: true, subtree: true });
+
+  refresh();
 }
 
 // ── Render ─────────────────────────────────────────────────────────────────

@@ -296,6 +296,25 @@ select {
   background: white;
 }
 
+/* Sticky horizontal scrollbar — pinned to viewport bottom so it's always
+   reachable, no matter how far down the (potentially very tall) table
+   the user has scrolled. Mirrors scrollLeft with .table-wrapper via JS. */
+#sticky-hscroll {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 16px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  background: var(--grey-50);
+  border-top: 1px solid var(--grey-200);
+  z-index: 50;
+  display: none;
+}
+#sticky-hscroll.visible { display: block; }
+#sticky-hscroll-inner { height: 1px; }
+
 table {
   width: max-content;
   min-width: 100%;
