@@ -79,18 +79,23 @@ def init_db():
     con = sqlite3.connect(DB_PATH, check_same_thread=False)
     con.execute("""
         CREATE TABLE IF NOT EXISTS page_hashes (
-            id            TEXT PRIMARY KEY,
-            employer      TEXT,
-            careers_url   TEXT,
-            ats_type      TEXT,
-            content_hash  TEXT,
-            http_status   INTEGER,
-            last_checked  TEXT,
-            last_changed  TEXT,
-            check_count   INTEGER DEFAULT 0,
-            error         TEXT
+            id              TEXT PRIMARY KEY,
+            employer        TEXT,
+            careers_url     TEXT,
+            ats_type        TEXT,
+            content_hash    TEXT,
+            http_status     INTEGER,
+            last_checked    TEXT,
+            last_changed    TEXT,
+            check_count     INTEGER DEFAULT 0,
+            error           TEXT,
+            keyword_flagged INTEGER DEFAULT 0
         )
     """)
+    # Older DBs won't have this column yet — add it if missing.
+    cols = [r[1] for r in con.execute("PRAGMA table_info(page_hashes)").fetchall()]
+    if "keyword_flagged" not in cols:
+        con.execute("ALTER TABLE page_hashes ADD COLUMN keyword_flagged INTEGER DEFAULT 0")
     con.execute("""
         CREATE TABLE IF NOT EXISTS change_log (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -111,32 +116,36 @@ def upsert_hash(con, row):
     con.execute("""
         INSERT INTO page_hashes
             (id, employer, careers_url, ats_type, content_hash, http_status,
-             last_checked, last_changed, check_count, error)
-        VALUES (?,?,?,?,?,?,?,?,?,?)
+             last_checked, last_changed, check_count, error, keyword_flagged)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?)
         ON CONFLICT(id) DO UPDATE SET
-            content_hash = excluded.content_hash,
-            http_status  = excluded.http_status,
-            last_checked = excluded.last_checked,
-            last_changed = CASE
+            content_hash    = excluded.content_hash,
+            http_status     = excluded.http_status,
+            last_checked    = excluded.last_checked,
+            last_changed    = CASE
                 WHEN content_hash != excluded.content_hash THEN excluded.last_changed
                 ELSE last_changed
             END,
-            check_count  = check_count + 1,
-            error        = excluded.error
+            check_count     = check_count + 1,
+            error           = excluded.error,
+            keyword_flagged = excluded.keyword_flagged
     """, (
         row["id"], row["employer"], row["careers_url"], row["ats_type"],
         row["content_hash"], row["http_status"],
         row["last_checked"], row["last_changed"],
-        0, row["error"]
+        0, row["error"], int(row["keyword_flagged"])
     ))
     con.commit()
 
-def get_previous_hash(con, company_id):
+def get_previous_state(con, company_id):
+    """Returns (content_hash, was_keyword_flagged) — both None/False if never checked."""
     cur = con.execute(
-        "SELECT content_hash FROM page_hashes WHERE id = ?", (company_id,)
+        "SELECT content_hash, keyword_flagged FROM page_hashes WHERE id = ?", (company_id,)
     )
     result = cur.fetchone()
-    return result[0] if result else None
+    if not result:
+        return None, False
+    return result[0], bool(result[1])
 
 def log_change(con, company, keywords_found):
     con.execute("""
@@ -284,7 +293,7 @@ def _check_company(company, page, con, con_lock, now):
     ats  = company["ats_type"]
 
     with con_lock:
-        prev_hash = get_previous_hash(con, cid)
+        prev_hash, prev_keyword_flagged = get_previous_state(con, cid)
 
     # Workday blocks datacenter IPs — skip and log for manual follow-up.
     if ats == "Workday":
@@ -309,54 +318,63 @@ def _check_company(company, page, con, con_lock, now):
         log(f"  HTTP {status} for {name}", "WARN")
         error_entry = {"id": cid, "employer": name, "url": url, "status": status}
 
-    # Compare hashes
     hash_changed = prev_hash is not None and current_hash != prev_hash
     is_new       = prev_hash is None
 
-    flagged_entry = None
-    changed_name = None
-
     if hash_changed:
         log(f"  CHANGED {name} (prev={prev_hash[:8]}… now={current_hash[:8]}…)")
-        keywords = find_keywords(text)
-        log(f"  Keywords found for {name}: {keywords}")
-        with con_lock:
-            log_change(con, {**company, "ats_type": ats}, keywords)
-
-        if len(keywords) >= KEYWORD_THRESHOLD:
-            log(f"  *** FLAGGED {name} — {len(keywords)} keywords, ATS={ats} ***")
-            flagged_entry = {
-                "id":            cid,
-                "employer":      name,
-                "careers_url":   url,
-                "final_url":     final_url,
-                "ats_type":      ats,
-                "keywords":      keywords,
-                "keyword_count": len(keywords),
-                "detected_at":   now,
-            }
-        changed_name = name
-
     elif is_new:
         log(f"  NEW {name} — first visit, storing hash")
-        keywords = find_keywords(text)
-        if keywords:
-            log(f"  Keywords on first visit for {name}: {keywords}")
-
     else:
         log(f"  No change for {name}")
 
+    # Keyword state is computed every run, independent of whether the raw page
+    # hash changed — hashing whole-page text is noisy (cookie banners,
+    # accessibility widgets, and similar boilerplate can flip the hash between
+    # two fetches of otherwise-identical content), so gating alerts on "hash
+    # changed" alone produces both false positives (re-flagging an
+    # already-known-open scheme when unrelated DOM noise changes the hash) and
+    # false negatives (a first-ever check of a company whose scheme is already
+    # open silently establishes a baseline instead of alerting). Flagging on a
+    # keyword-threshold *transition* (not flagged -> flagged) fixes both.
+    keywords = find_keywords(text)
+    meets_threshold = len(keywords) >= KEYWORD_THRESHOLD
+
+    if hash_changed:
+        log(f"  Keywords found for {name}: {keywords}")
+        with con_lock:
+            log_change(con, {**company, "ats_type": ats}, keywords)
+    elif is_new and keywords:
+        log(f"  Keywords on first visit for {name}: {keywords}")
+
+    flagged_entry = None
+    changed_name = name if hash_changed else None
+
+    if meets_threshold and not prev_keyword_flagged:
+        log(f"  *** FLAGGED {name} — {len(keywords)} keywords, ATS={ats} ***")
+        flagged_entry = {
+            "id":            cid,
+            "employer":      name,
+            "careers_url":   url,
+            "final_url":     final_url,
+            "ats_type":      ats,
+            "keywords":      keywords,
+            "keyword_count": len(keywords),
+            "detected_at":   now,
+        }
+
     with con_lock:
         upsert_hash(con, {
-            "id":           cid,
-            "employer":     name,
-            "careers_url":  url,
-            "ats_type":     ats,
-            "content_hash": current_hash,
-            "http_status":  status,
-            "last_checked": now,
-            "last_changed": now if hash_changed else None,
-            "error":        error_msg,
+            "id":              cid,
+            "employer":        name,
+            "careers_url":     url,
+            "ats_type":        ats,
+            "content_hash":    current_hash,
+            "http_status":     status,
+            "last_checked":    now,
+            "last_changed":    now if hash_changed else None,
+            "error":           error_msg,
+            "keyword_flagged": meets_threshold,
         })
 
     return flagged_entry, error_entry, changed_name

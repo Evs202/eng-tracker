@@ -29,7 +29,7 @@ GitHub Action (every 6h): Sheet 2 CSV → deadlines.js → Vercel deploy
 | Phase | Status | Notes |
 |---|---|---|
 | 1. Company list | Done, growing | 252 companies in `scraper/output/companies.csv` (237 original + 17 added 2026-07-02, minus 2 removed as invalid — see below). Full re-validation of the original 237 (2026-07-02) found: 117 alive, 75 blocked by the known systemic Workday issue (not a data problem), 34 confirmed genuinely dead (all now fixed with current URLs, or removed — see below), 26 unresolved/ambiguous (bot-protection made bulk automated re-checking unreliable even with delays; needs individual manual verification, not trusted either way). 2 rows removed: `hyder` (Hyder Consulting, fully absorbed into Arcadis in 2015, already a separate entry) and `nugen` (NuGeneration, wound up by Toshiba in 2019, company no longer exists). |
-| 2. Change detector | Done, partial | Working for non-Workday companies. Workday companies skipped — see Known Issues |
+| 2. Change detector | Done, partial | Working for non-Workday companies. Workday companies skipped — see Known Issues. Actually run end-to-end for the first time 2026-07-02 (previously only code-reviewed, never executed) — found and fixed a real flagging bug, see Known Issues |
 | 3. ATS parsers | Blocked on discovery, not the endpoint | Workday parser (`scraper/parsers/workday.py`) had a wrong API endpoint shape (`/fs/searchPaginated`); fixed 2026-07-02 to the real `/wday/cxs/{tenant}/{site}/jobs`, verified against a live tenant (a structured `HTTP_422` from Workday's own API, not a network block or shape error). Still can't get real results per-company without the `{site}` slug, which requires browser-based discovery (`discover_workday_sites.py`) — and that's still blocked by the same anti-bot wall as the VPS. See Known Issues. |
 | 4. Notifications | Done | Email via Resend, not Gmail (see Known Issues) |
 | 5. Sheet → Site pipeline | Done | GitHub Action every 6h, auto-deploys to Vercel |
@@ -82,6 +82,30 @@ Current behavior: `detector.py` detects `ats_type == "Workday"` and skips
 the company with a `WARN` log line rather than failing. Fix options not yet
 implemented: residential proxy (~£20-50/mo), running Workday checks from a
 home machine, or accepting manual quarterly checks for this subset.
+
+**Raw page-hash comparison was too noisy to gate alerts on (fixed 2026-07-02).**
+`detector.py` had never actually been run end-to-end before this date — it
+had only been code-reviewed. Running it against 5 real companies surfaced a
+real bug invisible from reading the code: `fetch_page()` hashes the whole
+page's visible text, but that text isn't stable between two fetches of
+genuinely-unchanged content — e.g. Kier's careers page (jobs.kier.co.uk)
+returned a different hash twice in one minute because an accessibility
+widget ("Skip to main content" / "Enable accessibility for low vision")
+injects itself into the DOM asynchronously and isn't reliably present by
+the time the fixed 2-second post-load wait fires. Gating alerts on "did the
+raw hash change" produced two failure modes: (1) false positives — an
+already-flagged company got re-flagged (and would have re-triggered an
+email alert) purely from this kind of unrelated DOM noise, and (2) false
+negatives — a company's *first-ever* check silently stored a baseline hash
+and never flagged even when grad keywords were already present on the page,
+so newly-added companies with an already-open scheme were silently missed.
+Fixed by tracking keyword-match *state* (a new `keyword_flagged` column in
+`page_hashes`) and gating alerts on a state *transition* (not-flagged →
+flagged) instead of on the raw hash — verified live: a company with
+already-open keywords now flags correctly on its first-ever check, and a
+company whose hash changes from unrelated noise (keywords unchanged) no
+longer re-flags. The raw hash is still tracked and logged for the "did the
+page change at all" signal, just no longer used to gate alerting.
 
 ## Tech Stack
 - Python 3.11+, Playwright (headless Chromium via `/snap/bin/chromium` on the VPS)
