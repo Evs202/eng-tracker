@@ -3,9 +3,13 @@ Workday Parser — Phase 3
 Queries the Workday public search API for each company to find
 graduate schemes, placements and internships.
 
-Workday exposes a consistent REST API across all tenants:
-  POST https://{company}.wd{N}.myworkday.com/{tenant}/fs/searchPaginated
+Workday's real public search endpoint (the CXS API) is:
+  POST https://{host}/wday/cxs/{tenant}/{site}/jobs
   with a JSON body filtering by job family / title keywords.
+{site} is a per-company slug that does NOT always match {tenant} and can
+only be reliably discovered by intercepting real browser network traffic
+(see discover_workday_sites.py) — without a discovered value, this falls
+back to guessing site == tenant, which is common but not guaranteed.
 
 Usage:
     from scraper.parsers.workday import parse_workday
@@ -77,9 +81,15 @@ def extract_tenant_from_url(url):
         return host, None, False
 
 
-def build_api_url(host, tenant):
-    """Build the Workday search API endpoint."""
-    return f"https://{host}/{tenant}/fs/searchPaginated"
+def build_api_url(host, tenant, site=None):
+    """
+    Build the Workday CXS search API endpoint.
+    `site` should come from a discovered value (discover_workday_sites.py);
+    falling back to site == tenant is an unverified guess, not correct for
+    every company.
+    """
+    site = site or tenant
+    return f"https://{host}/wday/cxs/{tenant}/{site}/jobs"
 
 
 def workday_search(api_url, keyword, offset=0, limit=20):
@@ -205,7 +215,14 @@ def parse_workday(company_row):
         print(f"  [{name}] Not a standard Workday subdomain — skipping")
         return []
 
-    api_url = build_api_url(host, tenant)
+    discovered_api_url = company_row.get("workday_api_url", "").strip()
+    if discovered_api_url:
+        api_url = discovered_api_url
+    else:
+        api_url = build_api_url(host, tenant)
+        print(f"  [{name}] No discovered site slug in companies.csv — guessing "
+              f"site=='{tenant}' (run discover_workday_sites.py for a verified value)")
+
     print(f"  [{name}] Querying Workday API: {api_url}")
 
     all_listings = []

@@ -30,7 +30,7 @@ GitHub Action (every 6h): Sheet 2 CSV → deadlines.js → Vercel deploy
 |---|---|---|
 | 1. Company list | Done, growing | 252 companies in `scraper/output/companies.csv` (237 original + 17 added 2026-07-02, minus 2 removed as invalid — see below). Full re-validation of the original 237 (2026-07-02) found: 117 alive, 75 blocked by the known systemic Workday issue (not a data problem), 34 confirmed genuinely dead (all now fixed with current URLs, or removed — see below), 26 unresolved/ambiguous (bot-protection made bulk automated re-checking unreliable even with delays; needs individual manual verification, not trusted either way). 2 rows removed: `hyder` (Hyder Consulting, fully absorbed into Arcadis in 2015, already a separate entry) and `nugen` (NuGeneration, wound up by Toshiba in 2019, company no longer exists). |
 | 2. Change detector | Done, partial | Working for non-Workday companies. Workday companies skipped — see Known Issues |
-| 3. ATS parsers | Blocked | Workday parser built (`scraper/parsers/workday.py`) but its API endpoint shape was also found to be wrong (`/fs/searchPaginated` instead of the real `/wday/cxs/{tenant}/{site}/jobs`), independent of the VPS block — see Known Issues |
+| 3. ATS parsers | Blocked on discovery, not the endpoint | Workday parser (`scraper/parsers/workday.py`) had a wrong API endpoint shape (`/fs/searchPaginated`); fixed 2026-07-02 to the real `/wday/cxs/{tenant}/{site}/jobs`, verified against a live tenant (a structured `HTTP_422` from Workday's own API, not a network block or shape error). Still can't get real results per-company without the `{site}` slug, which requires browser-based discovery (`discover_workday_sites.py`) — and that's still blocked by the same anti-bot wall as the VPS. See Known Issues. |
 | 4. Notifications | Done | Email via Resend, not Gmail (see Known Issues) |
 | 5. Sheet → Site pipeline | Done | GitHub Action every 6h, auto-deploys to Vercel |
 | Frontend | Redesigned 2026-07-01 | Dense spreadsheet-style table, sector grouping, blue palette. See `styles.css`/`app.js` |
@@ -97,7 +97,7 @@ home machine, or accepting manual quarterly checks for this subset.
 - `scraper/output/companies.csv` — master company list (Sheet 1 export)
 - `scraper/detector.py` — change detection, run every 6h via VPS cron
 - `scraper/notifier.py` — Resend email alerts on flagged changes
-- `scraper/parsers/workday.py` — Workday CXS parser (currently unusable from VPS, see Known Issues)
+- `scraper/parsers/workday.py` — Workday CXS parser; endpoint shape fixed 2026-07-02, but still needs a discovered per-company `{site}` slug to return real results (see Known Issues)
 - `scraper/discover_workday_sites.py` — one-off Workday job-site-name discovery script (largely unsuccessful, see Known Issues)
 - `scraper/validate_companies.py` — reusable, field-agnostic reachability + ATS-type validator (see discovery/validation pipeline note above); run with no args to re-check `companies.csv` in place
 - `.github/workflows/sync-sheet.yml` — Sheet 2 → site pipeline
@@ -106,7 +106,7 @@ home machine, or accepting manual quarterly checks for this subset.
 
 ## Next priorities
 1. Refresh Sheet 2 with current-cycle (2026/2027) deadlines — most existing rows show as closed
-2. Decide on a Workday fix (proxy / home-machine cron / manual) — note this now also needs a `workday.py` code fix (wrong API endpoint) independent of whichever network fix is chosen
+2. Decide on a Workday network fix (proxy / home-machine cron / manual) so `discover_workday_sites.py` can actually run and find real per-company site slugs — the `workday.py` endpoint bug itself is already fixed (2026-07-02), this is now purely a network-access problem
 3. Resolve the 26 remaining ambiguous companies from the 2026-07-02 re-validation with an isolated manual check (bulk automated re-checking proved unreliable for this bucket — see discovery/validation pipeline note above)
 4. Keep expanding the company list toward 1000+ using the discovery/validation pipeline (needs a decision on paid search-API access to make the discovery half — not just validation — actually unattended/scriptable)
 6. Real "Report a mistake" form (currently a placeholder Google Form link)
