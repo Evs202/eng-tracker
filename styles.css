@@ -423,8 +423,8 @@ td.date-cell.highlight-past {
 .stale-badge {
   display: inline-block;
   margin-left: 6px;
-  background: var(--amber-light);
-  color: var(--amber);
+  background: var(--grey-100);
+  color: var(--grey-600);
   border-radius: 4px;
   padding: 1px 5px;
   font-size: 10px;
@@ -459,7 +459,7 @@ td.date-cell.highlight-past {
 .status-select[data-status="Interview"]   { background: var(--purple-light);  color: var(--purple); border-color: #c4b5fd; }
 .status-select[data-status="Offer"]       { background: var(--green-light);   color: var(--green);  border-color: #86efac; }
 .status-select[data-status="Rejected"]    { background: var(--red-light);     color: var(--red);    border-color: #fca5a5; }
-.status-select[data-status="Online Test"] { background: var(--amber-light);   color: var(--amber);  border-color: #fcd34d; }
+.status-select[data-status="Online Test"] { background: var(--indigo-light);  color: var(--indigo); border-color: #c4c7f0; }
 
 /* Loading */
 .loading {

@@ -66,8 +66,24 @@ async function init() {
 
   document.getElementById('export-btn').addEventListener('click', exportCSV);
 
+  document.getElementById('table-body').addEventListener('change', e => {
+    if (e.target.classList.contains('status-select')) {
+      onStatusChange(e.target.dataset.id, e.target);
+    }
+  });
+
   setupStickyScroll();
   render();
+}
+
+// ── HTML escaping ──────────────────────────────────────────────────────────
+// Employer/scheme/notes/id come from the Google Sheet, not our own code, so
+// they can't be trusted to be free of quotes or angle brackets when building
+// HTML via template literals.
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
 }
 
 // ── Sticky horizontal scrollbar ───────────────────────────────────────────
@@ -169,9 +185,10 @@ function groupedRowsHTML(rows) {
 }
 
 function rowHTML(e, isStripe) {
-  const stale = isStale(e.last_verified) ? `<span class="stale-badge" title="Last verified ${e.last_verified}">OLD</span>` : '';
+  const id = escapeHtml(e.id);
+  const stale = isStale(e.last_verified) ? `<span class="stale-badge" title="Last verified ${escapeHtml(e.last_verified)}">OLD</span>` : '';
   const notes = e.early_closure_note
-    ? `⚠️ ${e.early_closure_note}`
+    ? `⚠️ ${escapeHtml(e.early_closure_note)}`
     : (e.rolling_basis ? 'Rolling — apply early' : '');
 
   const classes = [isStripe ? 'row-stripe' : '', e.status === 'closed' ? 'row-closed' : ''].filter(Boolean).join(' ');
@@ -180,15 +197,15 @@ function rowHTML(e, isStripe) {
   return `
     <tr${closedClass}>
       <td>
-        <select class="status-select" id="status-${e.id}" onchange="onStatusChange('${e.id}', this)">
-          ${STATUSES.map(s => `<option value="${s}">${s}</option>`).join('')}
+        <select class="status-select" id="status-${id}" data-id="${id}">
+          ${STATUSES.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('')}
         </select>
       </td>
-      <td><a class="employer-link" href="${e.url}" target="_blank" rel="noopener">${e.employer}</a></td>
-      <td>${e.scheme_name}</td>
+      <td><a class="employer-link" href="${escapeHtml(e.url)}" target="_blank" rel="noopener">${escapeHtml(e.employer)}</a></td>
+      <td>${escapeHtml(e.scheme_name)}</td>
       ${dateCellHTML(e.opening_date, false)}
       ${dateCellHTML(e.deadline, true, e, stale)}
-      <td class="col-locations">${(e.locations || []).join(', ')}</td>
+      <td class="col-locations">${escapeHtml((e.locations || []).join(', '))}</td>
       <td class="col-rolling">${e.rolling_basis ? '<span class="rolling-yes">✓</span>' : '<span class="rolling-no">—</span>'}</td>
       <td class="col-notes">${notes}</td>
     </tr>`;
@@ -203,10 +220,13 @@ function dateCellHTML(dateStr, isDeadline, e, extra) {
 
   const date = new Date(dateStr);
   const formatted = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-  const daysUntil = Math.ceil((date - Date.now()) / 86400000);
 
   if (isDeadline) {
-    const notYetPassed = daysUntil > 0;
+    // Deadlines close at the end of the stated day, not the start — `date`
+    // above parses as UTC midnight, which would mark a scheme "passed" up
+    // to ~24h before it actually stops accepting applications.
+    const endOfDay = new Date(`${dateStr}T23:59:59`);
+    const notYetPassed = endOfDay.getTime() > Date.now();
     const cellCls = notYetPassed ? 'date-cell highlight-open' : 'date-cell highlight-past';
     const spanCls = notYetPassed ? 'deadline-date' : 'deadline-date passed';
     return `<td class="${cellCls}"><span class="${spanCls}">${formatted}</span>${extra}</td>`;
@@ -214,6 +234,7 @@ function dateCellHTML(dateStr, isDeadline, e, extra) {
 
   // Opening date: highlight if it opens within the next 30 days (upcoming)
   // or has already opened (in the application window now).
+  const daysUntil = Math.ceil((date - Date.now()) / 86400000);
   const isImminent = daysUntil <= 30;
   const cellCls = isImminent ? 'date-cell highlight-soon' : 'date-cell';
   return `<td class="${cellCls}"><span class="deadline-date">${formatted}</span>${extra}</td>`;

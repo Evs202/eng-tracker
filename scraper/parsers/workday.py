@@ -97,8 +97,10 @@ def workday_search(api_url, keyword, offset=0, limit=20):
         resp = requests.post(api_url, json=payload, headers=HEADERS, timeout=15)
         if resp.status_code == 200:
             return resp.json()
+        print(f"  [workday] {api_url} returned HTTP {resp.status_code} for keyword {keyword!r}")
         return None
-    except Exception:
+    except Exception as e:
+        print(f"  [workday] request failed for {api_url} (keyword {keyword!r}): {e}")
         return None
 
 
@@ -250,7 +252,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     CSV_PATH = Path(__file__).parent.parent / "output" / "companies.csv"
-    companies = list(csv.DictReader(open(CSV_PATH, encoding="utf-8")))
+    companies = list(csv.DictReader(open(CSV_PATH, encoding="utf-8-sig")))
 
     if args.company:
         targets = [c for c in companies if c["id"] == args.company]

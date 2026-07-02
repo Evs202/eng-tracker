@@ -373,9 +373,13 @@ def run_detector():
         json.dump(flagged, f, indent=2)
 
     # Send email alert
+    alert_failed = False
     if flagged:
         from scraper.notifier import send_alert
-        send_alert(flagged)
+        if not send_alert(flagged):
+            alert_failed = True
+            log(f"Email alert FAILED for {len(flagged)} flagged listing(s) — "
+                f"see notifier output above. Check {FLAGGED_PATH} manually.", "ERROR")
 
     # Summary
     log("-" * 60)
@@ -385,6 +389,8 @@ def run_detector():
     log(f"  Flagged (grad keywords): {len(flagged)}")
     log(f"  Errors (bad URL/fetch):  {len(errors)}")
     log(f"  Flagged saved to:        {FLAGGED_PATH}")
+    if alert_failed:
+        log(f"  Email alert:             FAILED", "ERROR")
 
     if errors:
         log("-" * 60)
@@ -393,7 +399,7 @@ def run_detector():
             log(f"  {e['employer']} — {e['url']}")
 
     con.close()
-    return flagged, errors
+    return flagged, errors, alert_failed
 
 def print_report():
     if not DB_PATH.exists():
@@ -432,4 +438,6 @@ if __name__ == "__main__":
     if args.report:
         print_report()
     else:
-        run_detector()
+        _, _, alert_failed = run_detector()
+        if alert_failed:
+            sys.exit(1)

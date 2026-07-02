@@ -45,31 +45,29 @@ def test_table_loads(page: Page, server):
     assert rows.count() >= 1
 
 
-def test_filter_by_discipline(page: Page, server):
-    """T2: Filter by Mechanical shows only Mechanical rows; other disciplines hidden."""
+def test_filter_by_category(page: Page, server):
+    """T2: Filtering by a category pill narrows results; 'All Schemes' restores the full set."""
     page.goto(server)
-    page.select_option("#discipline-filter", "Mechanical")
-    page.wait_for_timeout(300)
+    page.wait_for_selector("tbody tr", timeout=5000)
+    all_count = page.locator("tbody tr").count()
 
-    rows = page.locator("tbody tr")
-    count = rows.count()
-    assert count >= 1, "Expected at least 1 Mechanical row"
-
-    # No row should show Civil-only content (a basic sanity check)
-    # (We verify filter is doing something, not just showing all rows)
-    all_count_selector = page.locator("tbody tr")
-    page.select_option("#discipline-filter", "all")
+    page.click('.pill[data-category="Graduate Scheme"]')
     page.wait_for_timeout(300)
-    all_count = all_count_selector.count()
-    # Civil filter should show fewer or equal rows than 'all'
-    assert count <= all_count
+    filtered_count = page.locator("tbody tr").count()
+    assert filtered_count >= 1, "Expected at least 1 Graduate Scheme row"
+    assert filtered_count <= all_count
+
+    page.click('.pill[data-category="all"]')
+    page.wait_for_timeout(300)
+    assert page.locator("tbody tr").count() == all_count
 
 
 def test_sort_by_deadline(page: Page, server):
     """T3: Sort ascending puts earliest deadline first; rolling/TBC dates last."""
     page.goto(server)
+    page.wait_for_selector("tbody tr", timeout=5000)
     # Click sort header to ensure ascending
-    sort_col = page.locator("#sort-col")
+    sort_col = page.locator("#sort-deadline")
     if "▼" in sort_col.inner_text():
         sort_col.click()
         page.wait_for_timeout(300)
