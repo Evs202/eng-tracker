@@ -22,6 +22,7 @@ import os
 import re
 import sqlite3
 import sys
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -46,7 +47,14 @@ GRAD_KEYWORDS = [
 KEYWORD_THRESHOLD = 2
 
 PAGE_TIMEOUT = 30000   # ms
-DELAY_BETWEEN = 2.0    # seconds between requests — be polite
+DELAY_BETWEEN = 2.0    # seconds between requests per worker — be polite
+
+# Opt-in concurrency. Defaults to 1 (today's exact sequential behaviour) so
+# nothing changes unless you explicitly set this. Each worker owns its own
+# Playwright browser instance (the sync API isn't safe to share across
+# threads), so bump this gradually and watch VPS memory before trusting it
+# in the cron job — untested above 1 worker in production.
+DETECTOR_WORKERS = max(1, int(os.environ.get("DETECTOR_WORKERS", "1")))
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 
@@ -66,7 +74,9 @@ def log(msg, level="INFO"):
 # ── Database ──────────────────────────────────────────────────────────────────
 
 def init_db():
-    con = sqlite3.connect(DB_PATH)
+    # check_same_thread=False: safe here because every access to `con` in the
+    # DETECTOR_WORKERS > 1 path is serialized via a lock in run_detector().
+    con = sqlite3.connect(DB_PATH, check_same_thread=False)
     con.execute("""
         CREATE TABLE IF NOT EXISTS page_hashes (
             id            TEXT PRIMARY KEY,
@@ -260,13 +270,127 @@ def load_companies():
             companies.append(row)
     return companies
 
-def run_detector():
+def _check_company(company, page, con, con_lock, now):
+    """
+    Check a single company's careers page and update the DB.
+    Returns (flagged_entry_or_None, error_entry_or_None, changed_name_or_None).
+    `con_lock` must be held around every `con` access — with DETECTOR_WORKERS
+    > 1, multiple threads call this concurrently, each with their own `page`
+    but sharing one sqlite connection.
+    """
+    cid  = company["id"]
+    name = company["employer"]
+    url  = company["careers_url"]
+    ats  = company["ats_type"]
+
+    with con_lock:
+        prev_hash = get_previous_hash(con, cid)
+
+    # Workday blocks datacenter IPs — skip and log for manual follow-up.
+    if ats == "Workday":
+        log(f"  SKIP {name} — Workday blocks VPS IPs (manual check needed)", "WARN")
+        return None, None, None
+
+    text, final_url, status = fetch_page(page, url)
+    # Detect ATS from final URL if redirected to known ATS
+    detected_ats = detect_ats_from_url(final_url)
+    if detected_ats and detected_ats != ats:
+        log(f"  ATS detected from redirect for {name}: {ats} → {detected_ats}")
+        ats = detected_ats
+
+    current_hash = hash_content(text)
+    error_msg = "" if status else "fetch_failed"
+    error_entry = None
+
+    if status == 0:
+        log(f"  ERROR: could not fetch {name} (status={status})", "WARN")
+        error_entry = {"id": cid, "employer": name, "url": url}
+    elif status >= 400:
+        log(f"  HTTP {status} for {name}", "WARN")
+        error_entry = {"id": cid, "employer": name, "url": url, "status": status}
+
+    # Compare hashes
+    hash_changed = prev_hash is not None and current_hash != prev_hash
+    is_new       = prev_hash is None
+
+    flagged_entry = None
+    changed_name = None
+
+    if hash_changed:
+        log(f"  CHANGED {name} (prev={prev_hash[:8]}… now={current_hash[:8]}…)")
+        keywords = find_keywords(text)
+        log(f"  Keywords found for {name}: {keywords}")
+        with con_lock:
+            log_change(con, {**company, "ats_type": ats}, keywords)
+
+        if len(keywords) >= KEYWORD_THRESHOLD:
+            log(f"  *** FLAGGED {name} — {len(keywords)} keywords, ATS={ats} ***")
+            flagged_entry = {
+                "id":            cid,
+                "employer":      name,
+                "careers_url":   url,
+                "final_url":     final_url,
+                "ats_type":      ats,
+                "keywords":      keywords,
+                "keyword_count": len(keywords),
+                "detected_at":   now,
+            }
+        changed_name = name
+
+    elif is_new:
+        log(f"  NEW {name} — first visit, storing hash")
+        keywords = find_keywords(text)
+        if keywords:
+            log(f"  Keywords on first visit for {name}: {keywords}")
+
+    else:
+        log(f"  No change for {name}")
+
+    with con_lock:
+        upsert_hash(con, {
+            "id":           cid,
+            "employer":     name,
+            "careers_url":  url,
+            "ats_type":     ats,
+            "content_hash": current_hash,
+            "http_status":  status,
+            "last_checked": now,
+            "last_changed": now if hash_changed else None,
+            "error":        error_msg,
+        })
+
+    return flagged_entry, error_entry, changed_name
+
+
+def _run_batch(batch, con, con_lock, now, launch_kwargs, results, results_lock):
+    """Run one worker's slice of companies with its own Playwright browser
+    instance (Playwright's sync API must not be shared across threads)."""
     from playwright.sync_api import sync_playwright
 
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(**launch_kwargs)
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        )
+        page = context.new_page()
+
+        for i, company in enumerate(batch):
+            log(f"[{i+1}/{len(batch)}] {company['employer']} — {company['careers_url']}")
+            result = _check_company(company, page, con, con_lock, now)
+            with results_lock:
+                results.append(result)
+            time.sleep(DELAY_BETWEEN)
+
+        context.close()
+        browser.close()
+
+
+def run_detector():
     companies = load_companies()
     log(f"Loaded {len(companies)} companies from {COMPANIES_CSV}")
 
     con = init_db()
+    con_lock = threading.Lock()
     flagged = []
     errors = []
     changed = []
@@ -278,95 +402,30 @@ def run_detector():
     if chromium_path:
         launch_kwargs["executable_path"] = chromium_path
 
-    with sync_playwright() as pw:
-        browser = pw.chromium.launch(**launch_kwargs)
-        context = browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-        )
-        page = context.new_page()
+    results = []
+    results_lock = threading.Lock()
 
-        for i, company in enumerate(companies):
-            cid  = company["id"]
-            name = company["employer"]
-            url  = company["careers_url"]
-            ats  = company["ats_type"]
+    if DETECTOR_WORKERS == 1:
+        _run_batch(companies, con, con_lock, now, launch_kwargs, results, results_lock)
+    else:
+        log(f"Running with {DETECTOR_WORKERS} concurrent workers (DETECTOR_WORKERS={DETECTOR_WORKERS})")
+        batches = [companies[i::DETECTOR_WORKERS] for i in range(DETECTOR_WORKERS)]
+        threads = [
+            threading.Thread(target=_run_batch, args=(batch, con, con_lock, now, launch_kwargs, results, results_lock))
+            for batch in batches if batch
+        ]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
 
-            log(f"[{i+1}/{len(companies)}] {name} — {url}")
-
-            prev_hash = get_previous_hash(con, cid)
-
-            # Workday blocks datacenter IPs — skip and log for manual follow-up.
-            if ats == "Workday":
-                log(f"  SKIP — Workday blocks VPS IPs (manual check needed)", "WARN")
-                time.sleep(DELAY_BETWEEN)
-                continue
-
-            text, final_url, status = fetch_page(page, url)
-            # Detect ATS from final URL if redirected to known ATS
-            detected_ats = detect_ats_from_url(final_url)
-            if detected_ats and detected_ats != ats:
-                log(f"  ATS detected from redirect: {ats} → {detected_ats}")
-                ats = detected_ats
-
-            current_hash = hash_content(text)
-            error_msg = "" if status else "fetch_failed"
-
-            if status == 0:
-                log(f"  ERROR: could not fetch (status={status})", "WARN")
-                errors.append({"id": cid, "employer": name, "url": url})
-            elif status >= 400:
-                log(f"  HTTP {status}", "WARN")
-                errors.append({"id": cid, "employer": name, "url": url, "status": status})
-
-            # Compare hashes
-            hash_changed = prev_hash is not None and current_hash != prev_hash
-            is_new       = prev_hash is None
-
-            if hash_changed:
-                log(f"  CHANGED (prev={prev_hash[:8]}… now={current_hash[:8]}…)")
-                keywords = find_keywords(text)
-                log(f"  Keywords found: {keywords}")
-                log_change(con, {**company, "ats_type": ats}, keywords)
-
-                if len(keywords) >= KEYWORD_THRESHOLD:
-                    log(f"  *** FLAGGED — {len(keywords)} keywords, ATS={ats} ***")
-                    flagged.append({
-                        "id":            cid,
-                        "employer":      name,
-                        "careers_url":   url,
-                        "final_url":     final_url,
-                        "ats_type":      ats,
-                        "keywords":      keywords,
-                        "keyword_count": len(keywords),
-                        "detected_at":   now,
-                    })
-                changed.append(name)
-
-            elif is_new:
-                log(f"  NEW — first visit, storing hash")
-                keywords = find_keywords(text)
-                if keywords:
-                    log(f"  Keywords on first visit: {keywords}")
-
-            else:
-                log(f"  No change")
-
-            upsert_hash(con, {
-                "id":           cid,
-                "employer":     name,
-                "careers_url":  url,
-                "ats_type":     ats,
-                "content_hash": current_hash,
-                "http_status":  status,
-                "last_checked": now,
-                "last_changed": now if hash_changed else None,
-                "error":        error_msg,
-            })
-
-            time.sleep(DELAY_BETWEEN)
-
-        context.close()
-        browser.close()
+    for flagged_entry, error_entry, changed_name in results:
+        if flagged_entry:
+            flagged.append(flagged_entry)
+        if error_entry:
+            errors.append(error_entry)
+        if changed_name:
+            changed.append(changed_name)
 
     # Write flagged entries for notification system (Phase 4)
     with open(FLAGGED_PATH, "w", encoding="utf-8") as f:
