@@ -13,9 +13,9 @@ import pytest
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 
-# Add scraper dir to path so we can import scraper.py
+# Add scraper dir to path so we can import selector_scraper.py
 sys.path.insert(0, str(Path(__file__).parent.parent / "scraper"))
-import scraper
+import selector_scraper as scraper
 
 
 # ── T6: load_config ────────────────────────────────────────────────────────
@@ -54,7 +54,7 @@ def test_scrape_employer_valid_selector():
     mock_response.text = mock_html
     mock_response.raise_for_status = MagicMock()
 
-    with patch("scraper.requests.get", return_value=mock_response):
+    with patch("selector_scraper.requests.get", return_value=mock_response):
         result = scraper.scrape_employer(employer_config)
 
     assert result["id"] == "test-employer"
@@ -81,7 +81,7 @@ def test_scrape_employer_selector_not_found():
     mock_response.text = "<html><body><p>No deadline here</p></body></html>"
     mock_response.raise_for_status = MagicMock()
 
-    with patch("scraper.requests.get", return_value=mock_response):
+    with patch("selector_scraper.requests.get", return_value=mock_response):
         result = scraper.scrape_employer(employer_config)
 
     assert result["id"] == "test-employer"
@@ -107,7 +107,7 @@ def test_scrape_employer_http_error():
     mock_response.status_code = 403
     mock_response.raise_for_status.side_effect = req.exceptions.HTTPError(response=mock_response)
 
-    with patch("scraper.requests.get", return_value=mock_response):
+    with patch("selector_scraper.requests.get", return_value=mock_response):
         result = scraper.scrape_employer(employer_config)
 
     assert result["id"] == "test-employer"

@@ -26,7 +26,6 @@ Usage:
 
 import argparse
 import csv
-import importlib.util
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -36,16 +35,8 @@ import requests
 sys.stdout.reconfigure(line_buffering=True)  # so redirected/background runs show live progress
 
 ROOT = Path(__file__).resolve().parent.parent
-
-# Load detector.py by direct file path rather than `from scraper.detector import
-# ...` — a plain `import scraper.X` breaks when this script is run directly
-# (python scraper/validate_companies.py), because Python then puts scraper/
-# itself on sys.path, and scraper/scraper.py (an unrelated legacy file) shadows
-# the scraper *package* under that same name.
-_spec = importlib.util.spec_from_file_location("_detector", ROOT / "scraper" / "detector.py")
-_detector = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_detector)
-detect_ats_from_url = _detector.detect_ats_from_url
+sys.path.insert(0, str(ROOT))
+from scraper.detector import detect_ats_from_url  # noqa: E402
 
 DEFAULT_INPUT = ROOT / "scraper" / "output" / "companies.csv"
 

@@ -1,11 +1,20 @@
 """
-UK Engineering Grad Scheme Deadline Scraper
+UK Engineering Grad Scheme Deadline Scraper — per-company CSS-selector approach.
 
-Run manually:  python scraper/scraper.py
-GitHub Actions runs this weekly and opens a PR if deadlines.json changed.
+Run manually:  python scraper/selector_scraper.py
 
-Learning note: This script visits each employer's career page, finds the
-deadline date using a CSS selector, and updates data/deadlines.json.
+Not currently part of the live pipeline (see SPEC.md) — detector.py's
+hash-diff + keyword-flag approach superseded this. Renamed 2026-07-02 from
+scraper.py, which collided with the scraper/ package name and broke imports
+in any script run directly from that directory (e.g. `from scraper.detector
+import X` failed because scraper/scraper.py shadowed the scraper package).
+Kept rather than deleted because it has real unit test coverage
+(tests/test_scraper.py) and scrapers-config.json still only has placeholder
+entries (deadline_selector: null) for 3 example companies — this approach
+was apparently parked mid-build, not finished and abandoned.
+
+This script visits each employer's career page, finds the deadline date
+using a CSS selector, and updates data/deadlines.json.
 """
 
 import json
