@@ -100,7 +100,6 @@ home machine, or accepting manual quarterly checks for this subset.
 - `scraper/parsers/workday.py` — Workday CXS parser (currently unusable from VPS, see Known Issues)
 - `scraper/discover_workday_sites.py` — one-off Workday job-site-name discovery script (largely unsuccessful, see Known Issues)
 - `scraper/validate_companies.py` — reusable, field-agnostic reachability + ATS-type validator (see discovery/validation pipeline note above); run with no args to re-check `companies.csv` in place
-- `scraper/gradcracker_seed.py` — bulk-scrapes Gradcracker's full employer directory across all disciplines/pages; flagged 2026-07-02 as a probable ToS/UK-database-right risk (systematic extraction of a third party's curated directory, not incidental lookup) and a likely contributor to the original company list's high dead-URL rate — do not run without reviewing that risk first; see the spawned research task from this session for a fuller writeup
 - `.github/workflows/sync-sheet.yml` — Sheet 2 → site pipeline
 - `index.html` / `styles.css` / `app.js` — the frontend
 - `CLAUDE.md` — session gotchas and conventions (read this before making changes)
@@ -109,6 +108,5 @@ home machine, or accepting manual quarterly checks for this subset.
 1. Refresh Sheet 2 with current-cycle (2026/2027) deadlines — most existing rows show as closed
 2. Decide on a Workday fix (proxy / home-machine cron / manual) — note this now also needs a `workday.py` code fix (wrong API endpoint) independent of whichever network fix is chosen
 3. Resolve the 26 remaining ambiguous companies from the 2026-07-02 re-validation with an isolated manual check (bulk automated re-checking proved unreliable for this bucket — see discovery/validation pipeline note above)
-4. Decide whether to keep, rewrite, or retire `gradcracker_seed.py` given the ToS/database-right concern noted above
-5. Keep expanding the company list toward 1000+ using the discovery/validation pipeline (needs a decision on paid search-API access to make the discovery half — not just validation — actually unattended/scriptable)
+4. Keep expanding the company list toward 1000+ using the discovery/validation pipeline (needs a decision on paid search-API access to make the discovery half — not just validation — actually unattended/scriptable)
 6. Real "Report a mistake" form (currently a placeholder Google Form link)
