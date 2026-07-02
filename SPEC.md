@@ -73,15 +73,23 @@ corrected URLs, 2 were removed as invalid — see status table above).
 
 ## Known Issues
 
-**Workday blocks the VPS entirely (81 of 238 companies affected).**
-Hetzner's datacenter IP is blocked by Workday at the network level — both
-`*.myworkday.com` (doesn't resolve via DNS) and the `*.myworkdayjobs.com`
-REST API (resolves, but returns 404/422 without the exact per-company "job
-site" slug, which can only be discovered by running JS in a real browser).
-Current behavior: `detector.py` detects `ats_type == "Workday"` and skips
-the company with a `WARN` log line rather than failing. Fix options not yet
-implemented: residential proxy (~£20-50/mo), running Workday checks from a
-home machine, or accepting manual quarterly checks for this subset.
+**Reachability-blocked companies: accepted as manual-only for now (decided 2026-07-02).**
+Two groups can't be reached by an automated headless browser at all, regardless
+of parsing approach — this is a network/anti-bot problem, not a data-quality
+or extraction problem, and no amount of better parsing fixes it: (1) Workday
+(75 of 252 companies) — blocked at the network level from every environment
+tested this session, not just the VPS (`*.myworkday.com` doesn't resolve,
+`*.myworkdayjobs.com` returns a generic "Workday is currently unavailable"
+anti-bot wall); `detector.py` detects `ats_type == "Workday"` and skips with
+a `WARN` log line. (2) A handful of Cloudflare-bot-challenge-protected
+companies found during the 2026-07-02 ambiguous-bucket triage (MBDA,
+National Grid, Spirent, BAE Systems Applied Intelligence — confirmed via a
+literal Cloudflare `__cf_chl_rt_tk` JS-challenge token and "Just a
+moment..." title, not a dead link). Decision: accept manual quarterly
+checks for both groups while pre-revenue, rather than paying for a
+residential proxy (~£20-50/mo) or running checks from a home machine. Their
+`companies.csv` URLs are correct as-is — do not "fix" these, there's
+nothing wrong with the URL, just the reachability.
 
 **Raw page-hash comparison was too noisy to gate alerts on (fixed 2026-07-02).**
 `detector.py` had never actually been run end-to-end before this date — it
@@ -129,8 +137,8 @@ page change at all" signal, just no longer used to gate alerting.
 - `CLAUDE.md` — session gotchas and conventions (read this before making changes)
 
 ## Next priorities
-1. Refresh Sheet 2 with current-cycle (2026/2027) deadlines — most existing rows show as closed
-2. Decide on a Workday network fix (proxy / home-machine cron / manual) so `discover_workday_sites.py` can actually run and find real per-company site slugs — the `workday.py` endpoint bug itself is already fixed (2026-07-02), this is now purely a network-access problem
-3. Resolve the 26 remaining ambiguous companies from the 2026-07-02 re-validation with an isolated manual check (bulk automated re-checking proved unreliable for this bucket — see discovery/validation pipeline note above)
+1. Build and prove out an LLM (Claude) extraction prototype against already-flagged pages — this is the actual answer to cross-site parsing consistency, since 55% of companies (131/237 original) use a bespoke "Custom" career site with no shared ATS/API to hook into, so no CSS-selector or hash-diff approach generalizes across them. Test against 2-3 real flagged pages before committing further. This is the parked "Phase 3.5" idea, now with a concrete technical reason it's the only mechanism that works: an LLM reads for meaning regardless of page structure, and the extraction prompt (not the mechanism) is what changes per vertical for the reusable-template goal.
+2. Research real current URLs for the 22 companies confirmed genuinely broken in the 2026-07-02 ambiguous-bucket triage (14 confirmed via DNS failure on two independent resolvers, 4 with SSL cert errors, 4 with other real errors — full list was in a since-cleaned-up scratch file, re-derivable by re-running `validate_companies.py` and cross-referencing against the Reachability-blocked note above to exclude the 4 Cloudflare-blocked-not-broken ones)
+3. Refresh Sheet 2 with current-cycle (2026/2027) deadlines — most existing rows show as closed
 4. Keep expanding the company list toward 1000+ using the discovery/validation pipeline (needs a decision on paid search-API access to make the discovery half — not just validation — actually unattended/scriptable)
 6. Real "Report a mistake" form (currently a placeholder Google Form link)
